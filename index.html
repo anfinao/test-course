@@ -1,133 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-    <title>Каталог</title>
+    <title>Демонстрационный магазин</title>
 </head>
 
 <body>
+
     <header>
-        <h1>Header 1</h1>
+        <h1>Мой Интернет-Магазин</h1>
         <nav>
-            <a href="other.html">Home</a>
-            <a href="#">Каталог</a>
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Каталог</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Корзина</a></li>
+            </ul>
         </nav>
     </header>
+
     <main>
         <section>
+            <h2>Категории товаров</h2>
             <ul>
-                <li>список 1</li>
-                <li>список 1</li>
-                <li>список 1</li>
-                <li>список 1</li>
+                <li>Электроника</li>
+                <li>Одежда</li>
+                <li>Дом и сад</li>
+                <li>Книги</li>
             </ul>
-            <ol>
-                <li>список 1</li>
-                <li>список 1</li>
-                <li>список 1</li>
-                <li>список 1</li>
-            </ol>
-
-            <dl>
-
-                <dt>HTML</dt>
-
-                <dd><span>язык</span> <span>язык</span> <span>язык</span> разметки, который описывает структуру
-                    документа</dd>
-
-                <dt>CSS</dt>
-
-                <dd>каскадные таблицы стилей. Это язык, который описывает, как должны выглядеть элементы
-                </dd>
-
-                <dt>JS</dt>
-
-                <dd> быстрый язык для “оживления” веб‑страниц в браузере</dd>
-
-            </dl>
         </section>
+
         <section>
+            <h2>Популярные продукты</h2>
+
             <article>
-                Продукт
+                <h3>Смартфон X10</h3>
+                <p>Описание: Мощный смартфон с отличной камерой.</p>
+                <p>Цена: 50 000 руб.</p>
+                <button>Купить</button>
             </article>
+
             <article>
-                <h2>Product</h2>
-                <img src="assets/S31e383272be34a94a99e809502ac7d8eQ.webp"
-                    alt="Текст">
-                <p><b>Lorem</b> <strong>ipsum</strong> dolor sit amet
-                    <i>consectetur</i> <em>adipisicing</em> elit. Minus aut repudiandae recusandae libero
-                    nesciunt, sequi architecto? Beatae molestiae officia voluptatum quos aperiam quis cum quod nesciunt
-                    incidunt doloremque, optio tempore.
-                </p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus aut repudiandae recusandae libero
-                    nesciunt, sequi architecto? Beatae molestiae officia voluptatum quos aperiam quis cum quod nesciunt
-                    incidunt doloremque, optio tempore.</p>
-                <blockquote>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta rem dolore architecto, sapiente id
-                    ipsam quod nulla mollitia necessitatibus iste consequatur molestiae ea deleniti odit ad blanditiis
-                    nemo expedita explicabo.
-                </blockquote>
-                <q>lorem</q>
+                <h3>Беспроводные наушники</h3>
+                <p>Описание: Чистый звук и длительное время работы.</p>
+                <p>Цена: 5 000 руб.</p>
+                <button>Купить</button>
+            </article>
+
+            <article>
+                <h3>Настольная лампа</h3>
+                <p>Описание: Регулируемая яркость и стильный дизайн.</p>
+                <p>Цена: 1 500 руб.</p>
+                <button>Купить</button>
             </article>
         </section>
-
-        <table border="1">
-            <caption>Отчет по продажам за квартал</caption>
-            <thead>
-                <tr>
-                    <th>Категория</th>
-                    <th>Сумма</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Электроника</td>
-                    <td>1000р</td>
-                </tr>
-                <tr>
-                    <td>Электроника</td>
-                    <td>1000р</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>Итого</td>
-                    <td>2000р</td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <form method="post">
-            <label for="user-name">Имя</label>
-            <input id="user-name"
-                name="name"
-                placeholder="test">
-            <br>
-            <label for="textarea">Text</label>
-            <textarea id="textarea"
-                name="text"
-                rows="10"></textarea>
-            <br>
-            <select name="select">
-                <optgroup>
-                    <option value="msk">Москва</option>
-                    <option value="spb">Санкт-Петербург</option>
-                </optgroup>
-                <option value="msk">Москва</option>
-                <option value="spb">Санкт-Петербург</option>
-                <option value="kzn">Казань</option>
-                <option value="nsk">Новосибирск</option>
-            </select>
-
-            <button type="button">Сохранить</button>
-        </form>
     </main>
+
     <footer>
-        Контакты
+        <hr>
+        <p>Информация о работе магазина:</p>
+        <address>
+            <ul>
+                <li>График: Пн-Пт, с 9:00 до 21:00</li>
+                <li>Телефон: <a href="tel:+7 (900) 000-00-00">+7 (900) 000-00-00</a></li>
+                <li>Email: <a href="mailto:info@example.com">info@example.com</a></li>
+                <li>Адрес: г. Москва, ул. Примерная, д. 1</li>
+            </ul>
+        </address>
+        <p>&copy; 2023 Все права защищены.</p>
     </footer>
+
 </body>
 
 </html>
