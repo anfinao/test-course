@@ -5,24 +5,129 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Каталог</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Catalog</a></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </nav>
-    <section>
-        <h1>Категории</h1>
-        <ul>
-            <li>Категория 1</li>
-            <li>Категория 2</li>
-            <li>Категория 3</li>
-        </ul>
-    </section>
+    <header>
+        <h1>Header 1</h1>
+        <nav>
+            <a href="other.html">Home</a>
+            <a href="#">Каталог</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <ul>
+                <li>список 1</li>
+                <li>список 1</li>
+                <li>список 1</li>
+                <li>список 1</li>
+            </ul>
+            <ol>
+                <li>список 1</li>
+                <li>список 1</li>
+                <li>список 1</li>
+                <li>список 1</li>
+            </ol>
+
+            <dl>
+
+                <dt>HTML</dt>
+
+                <dd><span>язык</span> <span>язык</span> <span>язык</span> разметки, который описывает структуру
+                    документа</dd>
+
+                <dt>CSS</dt>
+
+                <dd>каскадные таблицы стилей. Это язык, который описывает, как должны выглядеть элементы
+                </dd>
+
+                <dt>JS</dt>
+
+                <dd> быстрый язык для “оживления” веб‑страниц в браузере</dd>
+
+            </dl>
+        </section>
+        <section>
+            <article>
+                Продукт
+            </article>
+            <article>
+                <h2>Product</h2>
+                <img src="assets/S31e383272be34a94a99e809502ac7d8eQ.webp"
+                    alt="Текст">
+                <p><b>Lorem</b> <strong>ipsum</strong> dolor sit amet
+                    <i>consectetur</i> <em>adipisicing</em> elit. Minus aut repudiandae recusandae libero
+                    nesciunt, sequi architecto? Beatae molestiae officia voluptatum quos aperiam quis cum quod nesciunt
+                    incidunt doloremque, optio tempore.
+                </p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus aut repudiandae recusandae libero
+                    nesciunt, sequi architecto? Beatae molestiae officia voluptatum quos aperiam quis cum quod nesciunt
+                    incidunt doloremque, optio tempore.</p>
+                <blockquote>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta rem dolore architecto, sapiente id
+                    ipsam quod nulla mollitia necessitatibus iste consequatur molestiae ea deleniti odit ad blanditiis
+                    nemo expedita explicabo.
+                </blockquote>
+                <q>lorem</q>
+            </article>
+        </section>
+
+        <table border="1">
+            <caption>Отчет по продажам за квартал</caption>
+            <thead>
+                <tr>
+                    <th>Категория</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Электроника</td>
+                    <td>1000р</td>
+                </tr>
+                <tr>
+                    <td>Электроника</td>
+                    <td>1000р</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Итого</td>
+                    <td>2000р</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <form method="post">
+            <label for="user-name">Имя</label>
+            <input id="user-name"
+                name="name"
+                placeholder="test">
+            <br>
+            <label for="textarea">Text</label>
+            <textarea id="textarea"
+                name="text"
+                rows="10"></textarea>
+            <br>
+            <select name="select">
+                <optgroup>
+                    <option value="msk">Москва</option>
+                    <option value="spb">Санкт-Петербург</option>
+                </optgroup>
+                <option value="msk">Москва</option>
+                <option value="spb">Санкт-Петербург</option>
+                <option value="kzn">Казань</option>
+                <option value="nsk">Новосибирск</option>
+            </select>
+
+            <button type="button">Сохранить</button>
+        </form>
+    </main>
+    <footer>
+        Контакты
+    </footer>
 </body>
 
 </html>
