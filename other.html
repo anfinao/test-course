@@ -3,16 +3,162 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/selectors-combine.css">
 </head>
 
 <body>
-    <h1>Другая страница</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis assumenda ad ipsam esse tenetur sunt nesciunt
-        itaque asperiores vitae quisquam quos rerum sit obcaecati temporibus, eligendi amet adipisci molestias expedita!
-    </p>
+    <section>
+        <h1>Комбинирование селекторов</h1>
+        <article>
+            <h2>Перечисление</h2>
+            <code>
+                #list-first, 
+                #list-second {}
+            </code>
+            <ul>
+                <li id="list-first">Пункт 1</li>
+                <li id="list-second">Пункт 2</li>
+                <li id="list-third">Пункт 3</li>
+                <li>Пункт 4</li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Уточнение селектора (слитно)</h2>
+            <code>
+                .some-list.is-red {
+                    color: red;
+                }
+            </code>
+            <ul>
+                <li class="some-list">Пункт 1 (some-list)</li>
+                <li class="some-list is-red">Пункт 2 (some-list is-red)</li>
+                <li class="other-some-list is-red">Пункт 3</li>
+                <li>Пункт 4</li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Все дочерние элементы</h2>
+            <code>
+                .all-child-example li {}
+            </code>
+            <ul class="all-child-example">
+                <li id="list-first">
+                    <h3>Заголовок статьи</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+                <li id="list-second">
+                    <h3>Заголовок статьи 2</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+                <li id="list-third">
+                    <h3>Заголовок статьи 3</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+                <li>
+                    <h3>Заголовок статьи 4</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Только первый уровень вложенности</h2>
+            <p>Поменяли тип маркера у списков</p>
+            <code>
+                .only-first-level > li {}
+            </code>
+            <ul class="only-first-level">
+                <li>
+                    <h3>Заголовок статьи</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                    <ul>
+                        <li>1 Список второго уровня</li>
+                        <li>2 Список второго уровня</li>
+                        <li>3 Список второго уровня</li>
+                        <li>4 Список второго уровня</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Заголовок статьи 2</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+                <li id="list-third">
+                    <h3>Заголовок статьи 3</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+                <li>
+                    <h3>Заголовок статьи 4</h3>
+                    <p>Сама статья Lorem ipsum dolor sit amet consectetur, adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi? Сама статья Lorem ipsum dolor sit amet consectetur,
+                        adipisicing elit. In suscipit labore iste
+                        eveniet asperiores? Est fugiat blanditiis, sunt natus sapiente ipsa corporis amet quam vitae
+                        illum? Sapiente fugit veritatis modi?</p>
+                </li>
+            </ul>
+        </article>
+
+        <article>
+            <h2>Первый соседний элемент</h2>
+            <div>
+                <form class="first-input-styled">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                    <input type="button" value="input Кнопка">
+                </form>
+            </div>
+        </article>
+
+        <article>
+            <h2>Все последующие соседи</h2>
+            <div class="all-input-styled">
+                <form>
+                    <label for="name-2">Name</label>
+                    <input type="text" name="name" id="name-2">
+                    <input type="button" value="input Кнопка">
+                </form>
+            </div>
+        </article>
+    </section>
 </body>
 
 </html>

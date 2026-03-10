@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/pseudoclasses.css">
+</head>
+
+<body>
+    <main>
+        <h1>Примеры псевдоклассов</h1>
+        <section>
+            <article>
+                <h2>Наведение на кнопку - :hover</h2>
+                <button class="btn">Нажми меня!</button>
+            </article>
+
+            <article>
+                <h2>Фокус (:focus)</h2>
+                <input type="text" class="input-field" placeholder="Введите текст...">
+            </article>
+            <article>
+                <h2>:first-child и :last-child — Первый/последний элемент</h2>
+                <ul class="list">
+                    <li>Первый элемент</li>
+                    <li>Второй элемент</li>
+                    <li>Третий элемент</li>
+                    <li>Последний элемент</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>Каждые N-й элемент</h2>
+                <ul class="items">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>:not() — Исключение элемента</h2>
+                <ul class="menu">
+                    <li>Главная</li>
+                    <li>Товары</li>
+                    <li>Контакты</li>
+                    <li>Выйти</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>Таблица: nth-child(odd) и nth-child(2)</h2>
+                <table>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                    </tr>
+                    <tr>
+                        <td>Кофе</td>
+                        <td>120</td>
+                    </tr> <!-- 2-й tr: станет tomato -->
+                    <tr>
+                        <td>Чай</td>
+                        <td>90</td>
+                    </tr>
+                    <tr>
+                        <td>Сок</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td>Вода</td>
+                        <td>50</td>
+                    </tr>
+                </table>
+            </article>
+
+            <article>
+                <h2>Текст: p:nth-of-type(2)</h2>
+                <div>
+                    <p>Первый абзац (обычный).</p>
+                    <p>Второй абзац (станет курсивом).</p>
+                    <p>Третий абзац (обычный).</p>
+                </div>
+            </article>
+
+            <article>
+                <h2>Кнопки: button:disabled</h2>
+                <button>Активная</button>
+                <button disabled>Отключена</button>
+            </article>
+
+            <article>
+                <h2>Инпуты: enabled / required / invalid / valid</h2>
+                <form>
+                    <!-- required + type="email" даст invalid/valid в зависимости от введённого -->
+                    <label>
+                        Email (обязательное поле):
+                        <input type="email" required placeholder="name@example.com" />
+                    </label>
+
+                    <!-- enabled: применится (не disabled) -->
+                    <label>
+                        Имя (необязательное):
+                        <input type="text" placeholder="Например, Иван" />
+                    </label>
+
+                    <!-- disabled: НЕ будет под :enabled -->
+                    <label>
+                        Поле отключено:
+                        <input type="text" disabled value="Нельзя редактировать" />
+                    </label>
+                </form>
+            </article>
+
+            <article>
+                <h2>Ссылки: a:visited</h2>
+                <p>
+                    Открой ссылку, вернись назад — и она станет <b>visited</b>:
+                    <a href="https://example2.com" target="_blank" rel="noopener noreferrer">example2.com</a>
+                </p>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>

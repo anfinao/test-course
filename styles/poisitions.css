@@ -1,0 +1,38 @@
+.menu {
+    background-color: cadetblue;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(45deg, #ffa726, #fb8c00);
+    text-shadow: 1px 2px #00a085;
+}
+
+.demo-children {
+    background: linear-gradient(45deg, #00b894, #00a085);
+}
+
+.demo-children-index {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-fixed {
+    position: fixed;
+    /* top: 0; */
+    /* bottom: 0; */
+    /* z-index: 2; */
+}
+
+.position-sticky {
+    position: sticky;
+    top: 0;
+}

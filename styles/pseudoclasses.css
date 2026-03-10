@@ -1,0 +1,131 @@
+button:hover {
+    background: #222;
+    color: #fff;
+}
+
+.input-field:focus {
+    outline: 2px solid dodgerblue;
+}
+
+a:link {
+    color: #0a66ff;
+}
+
+/* Первый и последний элемент */
+.list {
+    list-style: none;
+    padding: 0;
+    max-width: 300px;
+}
+
+.list li {
+    padding: 15px;
+    margin-bottom: 5px;
+    background: #f8fafc;
+    border-left: 4px solid #e2e8f0;
+}
+
+.list li:first-child {
+    border-left-color: #10b981;
+    background: #ecfdf5;
+}
+
+.list li:last-child {
+    border-left-color: #f59e0b;
+    background: #fef3c7;
+}
+
+/*Каждые N-й элемент*/
+.items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 800px;
+}
+
+.item {
+    height: 100px;
+    background: #e0e7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* 2-й и 4-й элементы */
+.items li:nth-child(2n) {
+    background: #fee3db;
+}
+
+/* Каждые 3-й элемент */
+.items li:nth-child(3n) {
+    background: #bfdbfe;
+}
+
+/* 1-й, 4-й, 7-й... */
+.items li:nth-child(3n+1) {
+    background: #93c5fd;
+}
+
+/* :not() — Исключение элемента */
+.menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+}
+
+.menu li {
+    padding: 12px 20px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu li:not(:last-child) {
+    background: #a9b8cc;
+    border-right: 2px solid #cbd5e1;
+}
+
+.menu li:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background: #c90a0a;
+}
+
+tr:nth-child(2) {
+    color: tomato;
+}
+
+p:nth-of-type(2) {
+    font-style: italic;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+input:enabled {
+    background: #fff;
+}
+
+input:required {
+    border-color: #e53935;
+}
+
+input:invalid {
+    border-color: crimson;
+}
+
+input:valid {
+    border-color: seagreen;
+}
+
+
+a:visited {
+    color: rgb(0, 128, 21);
+}

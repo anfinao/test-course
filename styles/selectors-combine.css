@@ -1,0 +1,33 @@
+#list-first,
+#list-second {
+    color: #cc4109;
+}
+
+.some-list {
+    color: green;
+}
+
+.some-list.is-red {
+    color: red;
+}
+
+.all-child-example li {
+    color: #8e09cc;
+    font-style: italic;
+}
+
+.only-first-level>li {
+    list-style-type: square;
+}
+
+.first-input-styled label+input {
+    border-color: #cc4109;
+    outline: 2px dashed #8e09cc;
+    background-color: rgb(221, 157, 128);
+}
+
+.all-input-styled label~input {
+    border-color: #cc4109;
+    outline: 2px dashed #8e09cc;
+    background-color: rgb(221, 157, 128);
+}

@@ -1,0 +1,38 @@
+/*::before и ::after*/
+.quote::before {
+    content: "«";
+    color: blue;
+    font-size: 20px;
+}
+
+.quote::after {
+    content: "»";
+    color: blue;
+    font-size: 20px;
+}
+
+.article::first-letter {
+    font-size: 3em;
+    float: left;
+    margin-right: 8px;
+    color: darkred;
+}
+
+.article::first-line {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.styled-placeholder::placeholder {
+    color: lightsteelblue;
+    font-style: italic;
+}
+
+.styled-p::selection {
+    background: gold;
+    color: black;
+}
+
+.style-marker li::marker {
+    color: orange;
+}
