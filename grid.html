@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <style>
+        .grid-container {
+            display: grid;
+            /* Автоматически создает столько колонок по 250px, сколько влезет, 
+         но растягивает их (1fr), чтобы заполнить остаток места */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .grid-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        /* Возможность элемента занимать несколько ячеек */
+        .featured {
+            grid-column: span 2;
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+        }
+
+        /* На мобильных сбрасываем растяжение */
+        @media (max-width: 600px) {
+            .featured {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item featured">⭐ Акцентная карточка (2 колонки)</div>
+        <div class="grid-item">Обычный блок 1</div>
+        <div class="grid-item">Обычный блок 2</div>
+        <div class="grid-item">Обычный блок 3</div>
+        <div class="grid-item">Обычный блок 4</div>
+        <div class="grid-item">Обычный блок 5</div>
+    </div>
+</body>
+
+</html>

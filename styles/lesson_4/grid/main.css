@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: rgb(228, 204, 250);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-gap: 10px; */
+    /* grid-auto-rows: minmax(100px, auto); */
+}
+
+.block {
+    background-color: blueviolet;
+    color: white;
+    text-align: center;
+    align-content: center;
+}
+
+.example-title {
+    color: blueviolet;
+    margin: 16px;
+}
+
+.example-1 .container {
+    grid-gap: 10px;
+}
+
+.example-2 .container {
+    grid-template-rows: 100px 200px 40px;
+    grid-gap: 10px;
+}
+
+.example-3 .container {
+    grid-template: 50px 100px 20px / 1fr 2fr 1fr;
+    grid-gap: 10px;
+}
+
+.example-4 .container {
+    /* column-gap: 25px;
+    row-gap: 30px; */
+    grid-gap: 30px 25px;
+    margin-bottom: 16px;
+}
+
+.place-content-example .container {
+    height: 300px;
+    justify-content: start;
+    align-content: end;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+}
+
+.place-content-example .block {
+    height: 100px;
+}
+
+
+
+.place-items-example .container {
+    height: 300px;
+    justify-items: end;
+    align-items: center;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+}
+
+.place-items-example .block {
+    height: 50px;
+    width: 50px;
+}
+
+.element-grid-example .container {
+    gap: 10px;
+    grid-auto-rows: 100px;
+}
+
+.grid-column-example {
+    grid-column: 2 / 4;
+}
+
+.in-grid-elem {
+    width: fit-content;
+    height: 50px;
+    background-color: rgb(140, 140, 248);
+}
+
+.grid-row-example {
+    grid-row: span 3 / 4;
+}
+
+.place-self-example {
+    place-self: end center;
+}
+
+.area-block {
+    padding: 16px;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(155, 223, 255);
+}
+
+.area-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 100px;
+    grid-template-areas:
+        "header header header"
+        "menu bread bread"
+        "menu main main"
+        "menu main main"
+        "footer footer footer";
+}
+
+.header-grid-block {
+    grid-area: header;
+}
+
+.footer-grid-block {
+    grid-area: footer;
+}
+
+.menu-grid-block {
+    grid-area: menu;
+}
+
+.bread-grid-block {
+    grid-area: bread;
+}
+
+.main-grid-block {
+    grid-area: main;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Специфичность</title>
+    <link rel="stylesheet" href="./specifity.css">
+</head>
+
+<body>
+
+    <div id="container">
+        <h1>Заголовок 1 (navy)</h1>
+
+        <h2>Заголовок 2 (серый от body)</h2>
+        <h2 class="text">Заголовок 2 + класс (green)</h2>
+
+        <!-- <p class="warning">Предупреждение (красный!)</p> -->
+        <p class="warning" style="color: blue;">Предупреждение (красный!)</p>
+        <p>Обычный текст (серый от body)</p>
+
+        <div class="box">
+            <span>Наследует color + font, НЕ padding родителя</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

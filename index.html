@@ -20,7 +20,7 @@
     <header>
         <h1 id="test">Мой Интернет-Магазин - Logo</h1>
         <nav>
-            <ul>
+            <ul class="menu">
                 <li><a href="#">Главная</a></li>
                 <li><a href="#">Каталог</a></li>
                 <li><a href="other.html">Пример с селекторами</a></li>
@@ -30,9 +30,9 @@
         </nav>
     </header>
 
-    <main>
+    <main class="catalog">
         <!-- Пример Position -->
-        <section class="container">
+        <!-- <section class="container" hidden>
             <div class="position-absolute demo-children">
                 <h1>Мой Интернет-Магазин</h1>
             </div>
@@ -43,10 +43,10 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id perferendis, odio ex quam impedit veniam
                 ratione recusandae unde, placeat, iste dolor eveniet debitis! Reprehenderit ullam quibusdam
                 voluptatibus commodi inventore quasi?</p>
-        </section>
+        </section> -->
 
-        <section>
-            <h2>Категории товаров</h2>
+        <section class="categories">
+            <h2 style="color: #aaa;">Категории товаров</h2>
             <ul class="margin-collapsing">
                 <li>Электроника</li>
                 <li>Одежда</li>
@@ -55,45 +55,69 @@
             </ul>
         </section>
 
-        <section>
-            <h2>Популярные продукты</h2>
+        <section class="products_section">
+            <section>
+                <h2>Популярные продукты</h2>
 
-            <article>
-                <h3>Смартфон X10</h3>
-                <p>Описание: Мощный смартфон с отличной камерой.</p>
-                <p>Цена: 50 000 руб.</p>
-                <button>Купить</button>
-            </article>
+                <div class="products">
+                    <article class="products_card">
+                        <h3>Смартфон X10</h3>
+                        <p>Описание: Мощный смартфон с отличной камерой.</p>
+                        <p>Цена: 50 000 руб.</p>
+                        <button>Купить</button>
+                    </article>
 
-            <article>
-                <h3>Беспроводные наушники</h3>
-                <p>Описание: Чистый звук и длительное время работы.</p>
-                <p>Цена: 5 000 руб.</p>
-                <button>Купить</button>
-            </article>
+                    <article>
+                        <h3>Беспроводные наушники</h3>
+                        <p>Описание: Чистый звук и длительное время работы.</p>
+                        <p>Цена: 5 000 руб.</p>
+                        <button>Купить</button>
+                    </article>
 
-            <article>
-                <h3>Настольная лампа</h3>
-                <p>Описание: Регулируемая яркость и стильный дизайн.</p>
-                <p>Цена: 1 500 руб.</p>
-                <button>Купить</button>
-            </article>
-        </section>
+                    <article>
+                        <h3>Настольная лампа</h3>
+                        <p>Описание: Регулируемая яркость и стильный дизайн.</p>
+                        <p>Цена: 1 500 руб.</p>
+                        <button>Купить</button>
+                    </article>
 
-        <section class="text-center">
-            <h2>Заказать:</h2>
-            <form>
-                <div class="float-label" data-label="Обязательно для заполнения">
-                    <label for="name">Ваше имя</label>
-                    <input id="name" type="text" placeholder="Введите ваше имя" required>
+                    <article>
+                        <h3>Настольная лампа 2</h3>
+                        <p>Описание: Регулируемая яркость и стильный дизайн.</p>
+                        <p>Цена: 1 540 руб.</p>
+                        <button>Купить</button>
+                    </article>
+                    <article class="products_card">
+                        <h3>Смартфон X10</h3>
+                        <p>Описание: Мощный смартфон с отличной камерой.</p>
+                        <p>Цена: 50 000 руб.</p>
+                        <button>Купить</button>
+                    </article>
+
+                    <article>
+                        <h3>Беспроводные наушники</h3>
+                        <p>Описание: Чистый звук и длительное время работы.</p>
+                        <p>Цена: 5 000 руб.</p>
+                        <button>Купить</button>
+                    </article>
                 </div>
-            </form>
+            </section>
+
+            <section class="text-center" hidden>
+                <h2>Заказать:</h2>
+                <form>
+                    <div class="float-label" data-label="Обязательно для заполнения">
+                        <label for="name">Ваше имя</label>
+                        <input id="name" type="text" placeholder="Введите ваше имя" required>
+                    </div>
+                </form>
+            </section>
         </section>
     </main>
 
     <footer>
         <hr>
-        <p>Информация о работе магазина:</p>
+        <p><span>Информация</span> о работе магазина:</p>
         <address>
             <ul>
                 <li>График: Пн-Пт, с 9:00 до 21:00</li>

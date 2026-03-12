@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex-container {
+    background-color: rgb(228, 204, 250);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    min-height: fit-content;
+    gap: 16px;
+    flex-wrap: wrap-reverse;
+    position: relative;
+}
+
+.flex-container::before {
+    content: 'wrap-reverse';
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.block {
+    background-color: blueviolet;
+    width: 50px;
+    height: 50px;
+    color: white;
+    text-align: center;
+    /* margin: 16px; */
+}
+
+.example-title {
+    color: rgb(226, 105, 5);
+    background-color: rgb(255, 191, 139);
+}
+
+/* flex-direction */
+.direction-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: rgb(255, 191, 139);
+}
+
+.direction-reverse .block {
+    background-color: rgb(226, 125, 43);
+    margin: 8px;
+}
+
+/* column */
+.direction-reverse+.example-title {
+    color: rgb(40, 40, 248);
+    background-color: rgb(112, 112, 250);
+}
+
+.direction-column {
+    --block-color: rgb(40, 40, 248);
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(112, 112, 250);
+}
+
+.direction-column .block {
+    background-color: var(--block-color);
+    margin: 8px;
+}
+
+/* column-reverse */
+.direction-column+.example-title {
+    color: rgb(218, 32, 119);
+    background-color: rgb(255, 138, 193);
+}
+
+.direction-column-reverse {
+    --block-color: rgb(218, 32, 119);
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgb(255, 138, 193);
+}
+
+.direction-column-reverse .block {
+    background-color: var(--block-color);
+    margin: 8px;
+}

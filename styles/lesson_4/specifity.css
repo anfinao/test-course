@@ -1,0 +1,34 @@
+/* НАСЛЕДОВАНИЕ: цвет текста от body */
+body {
+    /* Серый для всего документа */
+    color: #666;
+    /* Шрифт наследуется */
+    font-family: Arial;
+}
+
+/* СПЕЦИФИЧНОСТЬ: 0010 */
+h1 {
+    color: navy;
+}
+
+/* СПЕЦИФИЧНОСТЬ: 0011 (h2 + класс) */
+h2.text {
+    color: green;
+}
+
+/* СПЕЦИФИЧНОСТЬ: 0100 (ID) */
+#container {
+    background: #f0f0f0;
+    padding: 20px;
+}
+
+/* СПЕЦИФИЧНОСТЬ: 0110 (ID + класс) */
+#container .warning {
+    color: red !important;
+    /* color: red; */
+}
+
+/* НАСЛЕДОВАНИЕ: padding НЕ наследуется */
+.box {
+    padding: 10px;
+}
