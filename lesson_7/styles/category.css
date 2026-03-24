@@ -1,0 +1,55 @@
+.catalog__inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-5);
+    padding: var(--space-6) 0;
+}
+
+@media (max-width: 920px) {
+    .catalog__inner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Categories */
+.categories {
+    border: 1px solid var(--color-border);
+    background: var(--grad-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-4);
+}
+
+.categories__title {
+    margin: 0 0 var(--space-3);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.categories__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+}
+
+.categories__item {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-text);
+    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.categories__item[active] {
+    border: 2px solid rgba(47, 247, 198, 0.35);
+}
+
+.categories__item:hover {
+    transform: translateY(-1px);
+    border-color: rgba(47, 247, 198, 0.35);
+    background: rgba(47, 247, 198, 0.08);
+}

@@ -1,0 +1,80 @@
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(14px);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+}
+
+.header__logo {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Nav */
+.nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--space-2);
+}
+
+.nav__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    color: var(--color-text-muted);
+    transition: transform 160ms ease, color 160ms ease, text-shadow 160ms ease;
+}
+
+.nav__item {
+    align-self: center;
+}
+
+.nav__link:hover {
+    transform: translateY(-1px);
+    text-shadow: 1px 1px rgba(255, 79, 216, 0.35);
+    /*color: var(--color-text); */
+}
+
+.nav__link--active {
+    color: rgb(255 79 216 / 78%);
+    font-weight: 600;
+}
+
+.edit-button {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+    fill: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.edit-button__icon {
+    width: 16px;
+    height: 16px;
+}
+
+.edit-button:hover {
+    fill: var(--color-text);
+}
