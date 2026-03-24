@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстрационный магазин</title>
+    <link rel="icon" href="../assets/favicon.png" type="image/x-icon">
+
+    <!-- предзагружаем нужные шрифты до того, как браузер начинает обрабатывать css-файл - это минимизирует скачки при отрисовке текста -->
+    <!-- crossorigin - если index.html запущен через Live Server -->
+    <link rel="preload" href="../assets/fonts/Inter/UcCo3FwrK3iLTcvmYwYL8g.woff2" as="font" type="font/woff2"
+          crossorigin>
+    <link rel="preload" href="../assets/fonts/Inter/UcCm3FwrK3iLTcvnUwAT9nA2.woff2" as="font" type="font/woff2"
+          crossorigin>
+    <link rel="preload" href="../assets/fonts/Inter/UcCm3FwrK3iLTcvnUwQT9g.woff2" as="font" type="font/woff2"
+          crossorigin>
+    <link rel="preload" href="../assets/fonts/Inter/UcCo3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/category.css">
+    <link rel="stylesheet" href="styles/products.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/form.css">
+
+</head>
+
+<body class="page">
+
+    <header class="header">
+        <div class="header__inner container">
+            <h1 class="header__logo" id="test">Мой Интернет-Магазин - Logo</h1>
+
+            <nav class="header__nav nav" aria-label="Основная навигация">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a class="nav__link nav__link--active" href="#">Главная</a>
+                    </li>
+                    <li class="nav__item">
+                        <a class="nav__link" href="#">Каталог</a>
+                    </li>
+                    <li class="nav__item">
+                        <button class="edit-button" id="edit-mode-button" type="button">
+                            <div class="edit-button__icon" id="edit-icon" title="Режим редактирования">
+                                <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 57.01V72.01H15L59.24 27.77L44.24 12.77L0 57.01Z" />
+                                    <path
+                                          d="M70.84 10.53L61.48 1.17C59.92 -0.39 57.4 -0.39 55.84 1.17L48.52 8.49L63.52 23.49L70.84 16.17C72.4 14.61 72.4 12.09 70.84 10.53Z" />
+                                </svg>
+                            </div>
+                            <div class="edit-button__icon" id="save-icon" title="Сохранить" hidden>
+                                <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                          d="M56 0H8C3.56 0 0 3.6 0 8V64C0 68.4 3.56 72 8 72H64C68.4 72 72 68.4 72 64V16L56 0ZM36 64C29.36 64 24 58.64 24 52C24 45.36 29.36 40 36 40C42.64 40 48 45.36 48 52C48 58.64 42.64 64 36 64ZM48 24H8V8H48V24Z" />
+                                </svg>
+
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page__main catalog">
+        <div class="catalog__inner container">
+            <section class="catalog__sidebar categories" aria-labelledby="categories-title">
+                <h2 class="categories__title" id="categories-title">Категории товаров</h2>
+
+                <ul id="categories-list" class="categories__list">
+                    <template id="category-item">
+                        <li class="categories__item">Название категории</li>
+                    </template>
+                </ul>
+
+                <!-- Диалог для формы добавления категории -->
+                <dialog id="add-category-modal" aria-labelledby="add-category-title">
+                    <div class="modal">
+                        <div class="modal__header">
+                            <h2 class="modal__title" id="add-category-title">Добавление категории</h2>
+                            <button class="modal__close" type="button" data-close aria-label="Закрыть">✕</button>
+                        </div>
+
+                        <section class="modal__body">
+                            <form class="add-category-form" name="add-category-form" action="#" method="post">
+                                <div class="field" data-label="Обязательно для заполнения">
+                                    <label class="field__label" for="category-name">
+                                        Наименование категории
+                                    </label>
+                                    <input class="field__control" id="category-name" name="category-name" type="text"
+                                           placeholder="Введите наименование категории" required>
+                                </div>
+
+                                <div class="add-product-form__actions">
+                                    <button id="accept-add-category" class="button">
+                                        Добавить категорию
+                                    </button>
+                                    <button id="cancel-add-category" class="button" type="reset">
+                                        Отмена
+                                    </button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </dialog>
+
+                <div class="example-btn-container" data-hidden hidden>
+                    <button
+                            id="clone-category"
+                            class="button example-btn"
+                            type="button">Добавить категорию</button>
+                </div>
+            </section>
+
+            <section class="catalog__content products-section">
+                <section class="products-section__block" aria-labelledby="popular-title">
+                    <h2 class="products-section__title" id="popular-title">Популярные продукты</h2>
+
+                    <div id="product-list" class="product-grid">
+                        <article class="product-card">
+                            <h3 class="product-card__title">Смартфон X10</h3>
+                            <p class="product-card__desc">Описание: Мощный смартфон с отличной камерой.</p>
+                            <p class="product-card__price">
+                                Цена: <span class="product-card__price-value">50 000</span> руб.
+                            </p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+
+                        <article class="product-card">
+                            <h3 class="product-card__title">Беспроводные наушники</h3>
+                            <p class="product-card__desc">Описание: Чистый звук и длительное время работы.</p>
+                            <p class="product-card__price">
+                                Цена: <span class="product-card__price-value">5 000</span> руб.
+                            </p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+
+                        <article class="product-card">
+                            <h3 class="product-card__title">Настольная лампа</h3>
+                            <p class="product-card__desc">Описание: Регулируемая яркость и стильный дизайн.</p>
+                            <p class="product-card__price">Цена: <span class="product-card__price-value">1 500</span>
+                                руб.</p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+
+                        <article class="product-card">
+                            <h3 class="product-card__title">Настольная лампа 2</h3>
+                            <p class="product-card__desc">Описание: Регулируемая яркость и стильный дизайн.</p>
+                            <p class="product-card__price">
+                                Цена: <span class="product-card__price-value">1 540</span> руб.
+                            </p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+
+                        <article class="product-card product-card--featured">
+                            <h3 class="product-card__title">Смартфон X10</h3>
+                            <p class="product-card__desc">Описание: Мощный смартфон с отличной камерой.</p>
+                            <p class="product-card__price">Цена: <span class="product-card__price-value">50 000</span>
+                                руб.</p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+
+                        <article class="product-card">
+                            <h3 class="product-card__title">Беспроводные наушники</h3>
+                            <p class="product-card__desc">Описание: Чистый звук и длительное время работы.</p>
+                            <p class="product-card__price">Цена: <span class="product-card__price-value">5 000</span>
+                                руб.</p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+                    </div>
+
+                    <template id="product-card-tmp">
+                        <article class="product-card">
+                            <h3 class="product-card__title">Заголовок</h3>
+                            <p class="product-card__desc">Описание</p>
+                            <p class="product-card__price">Цена: <span class="product-card__price-value">5 000</span>
+                                руб.</p>
+                            <button class="button button--primary" type="button">Купить</button>
+                            <br />
+                            <button class="button button--primary" type="button" data-delete>Удаление</button>
+                        </article>
+                    </template>
+
+                    <!-- Диалог для формы добавления продукта -->
+                    <dialog id="add-product-modal" aria-labelledby="add-product-title">
+                        <div class="modal">
+                            <div class="modal__header">
+                                <h2 class="modal__title" id="add-product-title">Добавление продукта</h2>
+                                <button class="modal__close" type="button" data-close aria-label="Закрыть">✕</button>
+                            </div>
+
+                            <section class="modal__body">
+                                <form class="add-product-form" name="add-product-form" action="#" method="post">
+                                    <div class="field" data-label="Обязательно для заполнения">
+                                        <label class="field__label" for="product-name">
+                                            Название продукта
+                                        </label>
+                                        <input class="field__control" id="product-name" name="product-name" type="text"
+                                               placeholder="Введите наименование продукта" required>
+                                    </div>
+
+                                    <div class="field" data-label="Обязательно для заполнения">
+                                        <label class="field__label" for="product-description">
+                                            Описание продукта
+                                        </label>
+                                        <textarea id="product-description" name="product-description"
+                                                  placeholder="Описание продукта"></textarea>
+                                    </div>
+
+                                    <div class="field" data-label="Обязательно для заполнения">
+                                        <label class="field__label" for="product-price">
+                                            Цена
+                                        </label>
+                                        <input class="field__control" id="product-price" name="product-price"
+                                               type="number" placeholder="Введите цену продукта" required>
+                                    </div>
+
+                                    <div class="add-product-form__actions">
+                                        <button id="accept-add-product" class="button">
+                                            Добавить продукт
+                                        </button>
+                                        <button id="cancel-add-product" class="button" type="reset">
+                                            Отмена
+                                        </button>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </dialog>
+                    <div class="example-btn-container" data-hidden hidden>
+                        <button id="add-product-button" class="button example-btn" type="button">Добавить
+                            продукт</button>
+                    </div>
+
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner container">
+            <p class="footer__lead">Информация о работе магазина:</p>
+
+            <address class="footer__address">
+                <ul class="footer__list">
+                    <li class="footer__item">График: Пн-Пт, с 9:00 до 21:00</li>
+                    <li class="footer__item">Телефон: <a class="footer__link" href="tel:+79000000000">+7 (900)
+                            000-00-00</a></li>
+                    <li class="footer__item">Email: <a class="footer__link"
+                           href="mailto:info@example.com">info@example.com</a></li>
+                    <li class="footer__item">Адрес: г. Москва, ул. Примерная, д. 1</li>
+                </ul>
+            </address>
+            <p class="footer__copyright">© 2026 Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="scripts/local-storage-service.js" crossorigin></script>
+    <script type="module" src="scripts/entities/catalog-store.js" crossorigin></script>
+    <script type="module" src="scripts/entities/category.js" crossorigin></script>
+    <script type="module" src="scripts/entities/product.js" crossorigin></script>
+    <script type="module" src="scripts/edit-mode.js" crossorigin></script>
+    <script type="module" src="scripts/select-category.js" crossorigin></script>
+
+    <script type="module" src="scripts/add-product.js"></script>
+    <script type="module" src="scripts/catalog.js"></script>
+    <script type="module" src="scripts/object-example.js"></script>
+    <script type="module" src="scripts/class-example.js"></script>
+</body>
+
+</html>
