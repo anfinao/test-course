@@ -7,12 +7,12 @@ export class Product {
     description = '';
     price = 0;
     category = null;
-    creationDate = new Date();
 
     constructor(name, description, price) {
         this.name = name;
         this.description = description;
         this.price = price ?? 0;
+        this.creationDate = new Date();
     }
 
     setDiscount(discount) {
@@ -54,9 +54,9 @@ export class Product {
 
         const clonedTemplateNode = productCardTemplate.content.cloneNode(true);
 
-        clonedTemplateNode.querySelector('.product-card__title').textContent = title;
-        clonedTemplateNode.querySelector('.product-card__desc').textContent = description;
-        clonedTemplateNode.querySelector('.product-card__price-value').textContent = price;
+        clonedTemplateNode.querySelector('.product-card__title').textContent = this.name;
+        clonedTemplateNode.querySelector('.product-card__desc').textContent = this.description;
+        clonedTemplateNode.querySelector('.product-card__price-value').textContent = this.price;
 
         productList.append(clonedTemplateNode);
     }

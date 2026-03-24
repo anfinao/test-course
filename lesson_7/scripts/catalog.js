@@ -1,4 +1,4 @@
-import { catalogStore } from './entities/catalog-store.js';
+import { catalogFacade } from './services/catalog-facade.js';
 import { Category } from './entities/category.js';
 
 const categoryListButtonId = 'clone-category';
@@ -47,7 +47,7 @@ function handleAddCategoryForm() {
         return;
     }
 
-    catalogStore.addCategory(Category.createCategory({ name: nameField.value }));
+    catalogFacade.addCategory(Category.createCategory({ name: nameField.value }));
     closeAddCategoryModal();
 }
 

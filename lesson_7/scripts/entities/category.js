@@ -5,13 +5,11 @@ export class Category {
     static categoryTemplateId = 'category-item';
 
     id = crypto.randomUUID();
-    name;
-    products = [];
     creationDate = new Date();
 
-    constructor(name, products) {
+    constructor(name, products = []) {
         this.name = name;
-        this.products = products ?? [];
+        this.products = products;
     }
 
     addProduct(product) {
@@ -35,7 +33,7 @@ export class Category {
         }
         if (obj.products && Array.isArray(obj.products)) {
             obj.products.forEach((product) => {
-                this.addProduct(Product.createProduct(product));
+                category.addProduct(Product.createProduct(product));
             })
         }
 
@@ -44,13 +42,16 @@ export class Category {
 
     addCategoryToList() {
         const categoryContainer = document.getElementById(Category.categoryListContainerId);
-        const liElement = document.getElementById(Category.categoryTemplateId);
+        const liElement = this.getCategoryElem();
+        categoryContainer.append(liElement);
+    }
 
-        if (liElement) {
-            const clonedLi = liElement.content.cloneNode(true);
-            clonedLi.querySelector('li').textContent = this.name;
-            clonedLi.querySelector('li').setAttribute('data-id', this.id);
-            categoryContainer.append(clonedLi);
-        }
+    getCategoryElem() {
+        const liElement = document.getElementById(Category.categoryTemplateId);
+        const clonedLi = liElement.content.cloneNode(true);
+        clonedLi.querySelector('li').textContent = this.name;
+        clonedLi.querySelector('li').setAttribute('data-id', this.id);
+
+        return clonedLi;
     }
 }

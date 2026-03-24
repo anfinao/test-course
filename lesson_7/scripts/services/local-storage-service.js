@@ -6,7 +6,12 @@ export class LocalStorageCatalogService {
         const categories = localStorage.getItem(this.#categoriesKey);
         if (categories) {
             const categoryList = JSON.parse(categories) ?? [];
-            categoryList.push(category);
+            const categoryLSIndex = categoryList.findIndex(item => item.id === category.id);
+            if (categoryLSIndex < 0) {
+                categoryList.push(category);
+            } else {
+                categoryList.splice(categoryLSIndex, 1, category);
+            }
 
             localStorage.setItem(this.#categoriesKey, JSON.stringify(categoryList));
         } else {

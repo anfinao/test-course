@@ -4,6 +4,16 @@ class User {
     lastName;
     isOnline = false;
 
+    constructor(username = '', fullName, isOnline) {
+        this.username = username;
+        this.isOnline = isOnline;
+        this.fullName = fullName;
+    }
+
+    updateOnline(online) {
+        this.isOnline = online;
+    }
+
     set fullName(value) {
         const [firstName, lastName] = value.split(' ');
         this.firstName = firstName;
@@ -14,11 +24,6 @@ class User {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    constructor(username = '', fullName, isOnline) {
-        this.username = username;
-        this.isOnline = isOnline;
-        this.fullName = fullName;
-    }
 
     static checkOnline(user) {
         console.log(`Online status: ${user.isOnline}`)
@@ -42,7 +47,9 @@ class User {
 // console.log(typeof User);
 
 const myUser = new User('Anna', 'Anna Finozhenko', false);
-// console.log(myUser, myUser.fullName)
+
+// User.checkOnline(myUser)
+// console.log(myUser.fullName)
 // User.checkOnline(myUser);
 
 class Admin extends User {
@@ -55,8 +62,9 @@ class Admin extends User {
 const admin = new Admin('admin', 'admin admin', true);
 // console.log(admin instanceof Object);
 // console.log(admin instanceof User);
+// console.log(admin);
 
-// User.prototype.someValue = 1;
+User.prototype.someValue = 1;
 // console.log(admin);
 // console.log(admin.someValue);
 // console.log(new User('test', 'test test', false).someValue);
