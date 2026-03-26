@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .loader {
+            display: none;
+        }
+
+        .loader.show {
+            display: block;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            inset: 0 0 0 0;
+            opacity: 0;
+            animation: show 1s linear;
+        }
+
+        .loader::after {
+            content: '';
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #0051ff;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+
+            position: absolute;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes show {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader"></div>
+    <main>
+        <form id="add">
+            <label for="text">Название:</label>
+            <input id="name" name="name" required placeholder="Введите название">
+            <button>Добавить</button>
+        </form>
+        <section>
+            <ul id="list-section">
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>
