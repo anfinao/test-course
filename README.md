@@ -7,8 +7,8 @@
 - в angular.json проверить что добавились конфиги для deploy (после 1 шага, установки либы)
 - добавить в angular.json в блок projects.<ваш проект>.architect.build добавить "baseHref": "/<имя репозитория>/" /
 
-Ваш проект - name из package.json (у меня "course")./
-Имя репозитория - то как у вас называется репозиторий (у меня например test-course)./
+Ваш проект - name из package.json (у меня "course"). \
+Имя репозитория - то как у вас называется репозиторий (у меня например test-course). \
 <img width="668" height="640" alt="image" src="https://github.com/user-attachments/assets/535db514-f684-47ee-82e7-8a63d91cc1bd" />
 
 
