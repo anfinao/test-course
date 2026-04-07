@@ -75,9 +75,8 @@
                 "deploy": {
                     "builder": "angular-cli-ghpages:deploy",
                     "options": {
-                        "name": "John Doe",
-                        "email": "john.doe@foo.bar",
-                        "cname": "foo.bar"
+                        "name": "Anna",
+                        "email": "bakisovaa@gmail.com"
                     }
                 }
             }
