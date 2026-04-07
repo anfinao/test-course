@@ -1,3 +1,5 @@
 <h1>{{ title }}</h1>
 <p>header works!</p>
-<a [href]="link.href">{{ link.name }}</a>
+@for (item of links; track $index) {
+<a [href]="item.linkHref">{{ item.title }}</a>
+}

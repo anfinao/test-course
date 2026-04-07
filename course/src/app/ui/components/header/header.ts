@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MenuItem } from './menu-item';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +10,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class Header {
     protected title = 'Product Catalog';
-    protected link = {
-        name: 'Mock link',
-        href: '#'
-    }
+
+    protected links: MenuItem[] = [
+        {
+            title: 'Link 1',
+            linkHref: '/link1',
+            accessRole: 'admin'
+        },
+        {
+            title: 'Link 2',
+            linkHref: '/link2',
+            accessRole: 'user'
+        },
+    ]
 }
