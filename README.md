@@ -4,6 +4,8 @@
 
 ### 2. Дополнить package.json и angular.json
 - в package.json добавить script: "deploy": "ng deploy"
+<img width="609" height="255" alt="image" src="https://github.com/user-attachments/assets/444537b8-00c6-4527-9f1c-8fa4ba97c8d7" />
+
 - в angular.json проверить что добавились конфиги для deploy (после 1 шага, установки либы)
 - добавить в angular.json в блок projects.<ваш проект>.architect.build добавить "baseHref": "/<имя репозитория>/" /
 
