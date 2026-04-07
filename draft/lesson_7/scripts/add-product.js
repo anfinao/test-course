@@ -81,7 +81,9 @@ function handleAddProductForm() {
 /** Закрытие модального окна */
 function closeAddProductModal() {
     form.setAttribute('novalidate', '');
-    form.reset();
+
+    console.log(new FormData(form).values());
+    //form.reset();
     form.removeAttribute('novalidate');
     addProductDialog.close();
 }
