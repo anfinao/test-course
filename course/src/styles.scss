@@ -1,1 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'vars';
+@use 'modal';
+@use 'form';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.45;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(var(--container), calc(100% - 2 * var(--space-4)));
+    margin-inline: auto;
+}
+
+/* Buttons */
+.button {
+    appearance: none;
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.button--primary {
+    color: rgba(10, 10, 16, 0.92);
+    background: linear-gradient(90deg, var(--color-mint), var(--color-blue));
+    box-shadow: 0 10px 22px rgba(58, 160, 255, 0.18);
+}
+
+.button--primary:hover {
+    transform: translateY(-1px);
+    filter: saturate(1.15) brightness(1.05);
+}
+
+.button--primary:active {
+    transform: translateY(0);
+}
+
+.example-btn-container {
+    text-align: center;
+    overflow: hidden;
+    margin: 16px auto;
+}
+
+@keyframes showButton {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 40px;
+    }
+}
+
+@keyframes hideButton {
+    from {
+        height: 40px;
+    }
+
+    to {
+        height: 0;
+    }
+}
+
+.example-btn-container:not([data-hidden]) {
+    animation: showButton 250ms ease both;
+    height: 40px;
+}
+
+.example-btn-container[data-hidden] {
+    animation: hideButton 100ms ease;
+    height: 0;
+}
+
+/* Focus */
+:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+    border-radius: 12px;
+}

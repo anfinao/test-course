@@ -1,0 +1,32 @@
+.products-section__title {
+    margin: 0 0 var(--space-3);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+
+    &:has(.empty-list) {
+        display: block;
+    }
+
+    .empty-list {
+        text-align: center;
+    }
+}
+
+@media (max-width: 1080px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}

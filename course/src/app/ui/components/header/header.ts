@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MenuItem } from './menu-item';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
     selector: 'app-header',
-    imports: [],
+    imports: [RouterLink, RouterLinkActive],
     templateUrl: './header.html',
     styleUrl: './header.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,13 +14,13 @@ export class Header {
 
     protected links: MenuItem[] = [
         {
-            title: 'Link 1',
-            linkHref: '/link1',
+            title: 'About',
+            linkHref: '/about',
             accessRole: 'admin'
         },
         {
-            title: 'Link 2',
-            linkHref: '/link2',
+            title: 'Catalog',
+            linkHref: '/products',
             accessRole: 'user'
         },
     ]

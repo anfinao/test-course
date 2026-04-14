@@ -1,5 +1,34 @@
-<h1>{{ title }}</h1>
-<p>header works!</p>
-@for (item of links; track $index) {
-<a [href]="item.linkHref">{{ item.title }}</a>
-}
+<header class="header">
+    <div class="header__inner container">
+        <h1 class="header__logo" routerLink="">Мой Интернет-Магазин - Logo</h1>
+
+        <nav class="header__nav nav" aria-label="Основная навигация">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" routerLink="about" routerLinkActive="nav__link--active">Главная</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" routerLink="products" routerLinkActive="nav__link--active">Каталог</a>
+                </li>
+                <li class="nav__item">
+                    <button class="edit-button" id="edit-mode-button" type="button">
+                        <div class="edit-button__icon" id="edit-icon" title="Режим редактирования">
+                            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 57.01V72.01H15L59.24 27.77L44.24 12.77L0 57.01Z" />
+                                <path
+                                        d="M70.84 10.53L61.48 1.17C59.92 -0.39 57.4 -0.39 55.84 1.17L48.52 8.49L63.52 23.49L70.84 16.17C72.4 14.61 72.4 12.09 70.84 10.53Z" />
+                            </svg>
+                        </div>
+                        <div class="edit-button__icon" id="save-icon" title="Сохранить" hidden>
+                            <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M56 0H8C3.56 0 0 3.6 0 8V64C0 68.4 3.56 72 8 72H64C68.4 72 72 68.4 72 64V16L56 0ZM36 64C29.36 64 24 58.64 24 52C24 45.36 29.36 40 36 40C42.64 40 48 45.36 48 52C48 58.64 42.64 64 36 64ZM48 24H8V8H48V24Z" />
+                            </svg>
+
+                        </div>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
