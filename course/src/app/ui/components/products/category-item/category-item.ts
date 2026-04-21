@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, inject, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, DoCheck, effect, inject, input, NgZone, OnInit, signal } from '@angular/core';
 
 @Component({
     selector: 'app-category-item',
@@ -9,11 +9,20 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, inject,
 })
 export class CategoryItem implements DoCheck, OnInit {
     public name = input.required<string>();
+    protected test = computed(() => this.name());
 
     private cdr = inject(ChangeDetectorRef);
-    ngOnInit(): void {
-        this.cdr.detach()
+
+    constructor() {
+        effect(() => {
+            // console.log(this.name())
+        });
     }
+
+    ngOnInit(): void {
+        this.cdr.detach();
+    }
+
     ngDoCheck(): void {
         console.log('CategoryItem')
     }
@@ -24,5 +33,7 @@ export class CategoryItem implements DoCheck, OnInit {
     }
     protected onClick(): void {
         //console.log('click')
+        this.cdr.reattach();
+        this.cdr.markForCheck();
     }
 }

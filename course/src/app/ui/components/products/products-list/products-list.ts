@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, DoCheck } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, inject, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { Product } from '../../../../types';
 import { ProductItem } from "../product-item/product-item";
 import { AddProductModal } from "../add-product-modal/add-product-modal";
+import { ProductStoreService } from '../../../../services/products/store.service';
+import { PRODUCT_REPOSITORY_SERVICE } from '../../../../services/products/product-repo.token';
+import { ProductRepositoryService } from '../../../../services/products/product-repository.service';
 
 @Component({
     selector: 'app-products-list',
@@ -9,70 +12,56 @@ import { AddProductModal } from "../add-product-modal/add-product-modal";
     templateUrl: './products-list.html',
     styleUrl: './products-list.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        ProductStoreService,
+        { provide: PRODUCT_REPOSITORY_SERVICE, useClass: ProductRepositoryService }
+    ]
 })
-export class ProductsList implements DoCheck {
-    protected isAddModalOpen = false;
-    protected productList: Product[] = [
-        {
-            id: "7b2-f41",
-            name: "Беспроводные наушники AirTune",
-            description: "Наушники с активным шумоподавлением и защитой от влаги.",
-            price: 12900,
-            category: "Электроника"
-        },
-        {
-            id: "a15-k98",
-            name: "Кожаный ежедневник",
-            description: "Формат А5, переплет из натуральной кожи, 200 страниц.",
-            price: 2500,
-            category: "Канцелярия"
-        },
-        {
-            id: "m44-s23",
-            name: "Кофемашина AromaPro",
-            description: "Автоматическая кофемашина с капучинатором и настройкой крепости напитка.",
-            price: 45000,
-            category: "Бытовая техника"
-        },
-        {
-            id: "x88-j12",
-            name: "Спортивная бутылка для воды",
-            description: "Объем 750 мл, выполнена из ударопрочного пластика BPA-free.",
-            price: 950,
-            category: "Спорт и отдых"
-        },
-        {
-            id: "e56-y31",
-            name: "Настольная лампа LED Flex",
-            description: "Регулируемая яркость и цветовая температура, сенсорное управление.",
-            price: 3200,
-            category: "Дом и свет"
-        }
-    ];
+export class ProductsList implements DoCheck, OnInit, OnChanges {
+    private productStore = inject(ProductStoreService);
+    private productRepostoryService = inject(PRODUCT_REPOSITORY_SERVICE);
+
+    protected productList = this.productStore.productList;
+
+    public text = input();
+    protected isAddModalOpen = signal(false);
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log({ changes })
+    }
+
+    ngOnInit(): void {
+        this.productRepostoryService.loadProducts();
+
+        console.log('ProductsList ngOnInit')
+    }
 
     ngDoCheck(): void {
-        console.log('ProductList');
-        setTimeout(() => {
-            this.productList.push({
-                id: "e56-y31" + new Date().toString(),
-                name: new Date().toString(),
-                description: "Регулируемая яркость и цветовая температура, сенсорное управление.",
-                price: 3200,
-                category: "Дом и свет"
-            })
-        }, 1000)
+        //console.log('ProductList');
     }
+
     protected openModal(): void {
-        this.isAddModalOpen = true;
+        this.isAddModalOpen.set(true);
     }
 
     protected closeModal(): void {
-        this.isAddModalOpen = false;
+        this.isAddModalOpen.set(false);
+
+        setTimeout(() => {
+            // this.productList.push({
+            //     id: "1" + new Date().toString(),
+            //     name: new Date().toString(),
+            //     description: "Регулируемая яркость и цветовая температура, сенсорное управление.",
+            //     price: 3200,
+            //     category: "Дом и свет"
+            // });
+
+            // console.log('ADD');
+            // this.cdr.markForCheck();
+        }, 1000)
     }
 
     protected deleteProduct(id: string): void {
-        const index = this.productList.findIndex(product => product.id === id);
-        this.productList.splice(index, 1);
-
+        this.productRepostoryService.deleteProduct(id);
     }
 }

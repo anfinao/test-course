@@ -13,13 +13,23 @@
         </div>
 
         <section class="modal__body">
-            <form class="add-product-form" name="add-product-form" action="#" method="post">
+            <form
+                class="add-product-form"
+                [formGroup]="form"
+                (ngSubmit)="onSubmit($event)"
+                (reset)="onReset($event)"
+            >
                 <div class="field" data-label="Обязательно для заполнения">
                     <label class="field__label" for="product-name">
                         Название продукта
                     </label>
-                    <input class="field__control" id="product-name" name="product-name" type="text"
-                            placeholder="Введите наименование продукта" required>
+                    <input
+                        class="field__control"
+                        id="product-name"
+                        formControlName="name"
+                        type="text"
+                        placeholder="Введите наименование продукта"
+                    >
                 </div>
 
                 <div class="field" data-label="Обязательно для заполнения">
@@ -29,6 +39,7 @@
                     <textarea
                         id="product-description" class="field__control"
                         name="product-description"
+                        formControlName="description"
                         placeholder="Описание продукта"></textarea>
                 </div>
 
@@ -36,12 +47,29 @@
                     <label class="field__label" for="product-price">
                         Цена
                     </label>
-                    <input class="field__control" id="product-price" name="product-price"
-                            type="number" placeholder="Введите цену продукта" required>
+                    <input
+                        formControlName="price"
+                        class="field__control"
+                        id="product-price"
+                        name="product-price"
+                        type="number"
+                        placeholder="Введите цену продукта"
+                    >
                 </div>
 
+                <div formArrayName="characteristics" class="characteristics">
+                    @for (item of characteristics.controls; track $index) {
+                    <div [formGroupName]="$index" class="characteristics__row">
+                        <input class="field__control" formControlName="characteristic" placeholder="Характеристика" />
+                        <input class="field__control" formControlName="value" placeholder="Значение" />
+                        <button type="button" (click)="removeCharacteristic($index)" class="modal__close">X</button>
+                    </div>
+                    }
+                </div>
+                <button type="button" class="button" (click)="addCharacteristic()">Добавить характеристику</button>
+
                 <div class="add-product-form__actions">
-                    <button id="accept-add-product" class="button">
+                    <button id="accept-add-product" class="button" [disabled]="form.invalid">
                         Добавить продукт
                     </button>
                     <button id="cancel-add-product" class="button" type="reset">

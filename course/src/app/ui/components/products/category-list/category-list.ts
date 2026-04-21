@@ -38,7 +38,7 @@ export class CategoryList implements DoCheck {
     ];
 
     ngDoCheck(): void {
-        console.log('CategoryList')
+        // console.log('CategoryList')
     }
 
     checkCheck() {

@@ -3,13 +3,18 @@
         <h2 class="products-section__title" id="popular-title">Популярные продукты</h2>
 
         <div id="product-list" class="product-grid">
-            @for (product of productList; track product.id) {
+            @let list = productList();
+
+            @for (product of list; track product.id) {
                 <app-product-item
                     [title]="product.name"
                     [description]="product.description"
                     [price]="product.price"
                     (delete)="deleteProduct(product.id)"
-                ></app-product-item>
+                >
+                    <span>Hello 1</span>
+                    <span header>Hello 2</span>
+                </app-product-item>
             } @empty {
                 <div class="empty-list">У данной категории не добавлены продукты</div>
             }
@@ -62,10 +67,13 @@
                 </section>
             </div>
         </dialog> -->
+        @if (isAddModalOpen()) {
         <app-add-product-modal
-            [isOpen]="isAddModalOpen"
+            [isOpen]="isAddModalOpen()"
             (close)="closeModal()"
         ></app-add-product-modal>
+        }
+
         <div class="example-btn-container">
             <button
                 class="button example-btn"
