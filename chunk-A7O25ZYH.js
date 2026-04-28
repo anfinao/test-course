@@ -1,0 +1,1 @@
+import{Da as n,Va as t,Wa as i,ib as o}from"./chunk-MO6AKDHT.js";var p=class a{static \u0275fac=function(e){return new(e||a)};static \u0275cmp=n({type:a,selectors:[["app-main-page"]],decls:2,vars:0,template:function(e,s){e&1&&(t(0,"p"),o(1,"main-page works!"),i())},encapsulation:2})};export{p as MainPage};
