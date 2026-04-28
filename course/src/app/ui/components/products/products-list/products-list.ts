@@ -1,23 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, inject, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
-import { Product } from '../../../../types';
-import { ProductItem } from "../product-item/product-item";
-import { AddProductModal } from "../add-product-modal/add-product-modal";
-import { ProductStoreService } from '../../../../services/products/store.service';
+import { ChangeDetectionStrategy, Component, inject, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { FormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
 import { PRODUCT_REPOSITORY_SERVICE } from '../../../../services/products/product-repo.token';
-import { ProductRepositoryService } from '../../../../services/products/product-repository.service';
+import { ProductStoreService } from '../../../../services/products/store.service';
+import { AddProductModal } from "../add-product-modal/add-product-modal";
+import { ProductItem } from "../product-item/product-item";
 
 @Component({
     selector: 'app-products-list',
-    imports: [ProductItem, AddProductModal],
+    imports: [ProductItem, AddProductModal, FormsModule],
     templateUrl: './products-list.html',
     styleUrl: './products-list.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        ProductStoreService,
-        { provide: PRODUCT_REPOSITORY_SERVICE, useClass: ProductRepositoryService }
-    ]
 })
-export class ProductsList implements DoCheck, OnInit, OnChanges {
+export class ProductsList implements OnInit, OnChanges {
     private productStore = inject(ProductStoreService);
     private productRepostoryService = inject(PRODUCT_REPOSITORY_SERVICE);
 
@@ -26,8 +21,10 @@ export class ProductsList implements DoCheck, OnInit, OnChanges {
     public text = input();
     protected isAddModalOpen = signal(false);
 
+    protected searchData = '';
+
     ngOnChanges(changes: SimpleChanges): void {
-        console.log({ changes })
+        // console.log({ changes })
     }
 
     ngOnInit(): void {
@@ -36,8 +33,9 @@ export class ProductsList implements DoCheck, OnInit, OnChanges {
         console.log('ProductsList ngOnInit')
     }
 
-    ngDoCheck(): void {
-        //console.log('ProductList');
+    protected search(value: Event): void {
+        //console.log({ value })
+        this.productRepostoryService.search(this.searchData);
     }
 
     protected openModal(): void {

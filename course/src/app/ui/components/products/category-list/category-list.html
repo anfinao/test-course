@@ -4,7 +4,7 @@
 
     <ul id="categories-list" class="categories__list">
         @for (category of categories; track category.id) {
-            <app-category-item [name]="category.name"></app-category-item>
+            <app-category-item [categoryData]="category"></app-category-item>
         }
     </ul>
 

@@ -2,6 +2,8 @@
     <section class="products-section__block" aria-labelledby="popular-title">
         <h2 class="products-section__title" id="popular-title">Популярные продукты</h2>
 
+        <input [(ngModel)]="searchData" (input)="search($event)">
+
         <div id="product-list" class="product-grid">
             @let list = productList();
 
@@ -12,7 +14,7 @@
                     [price]="product.price"
                     (delete)="deleteProduct(product.id)"
                 >
-                    <span>Hello 1</span>
+                    <span>{{ $first ? 'first' : 'not first' }} </span>
                     <span header>Hello 2</span>
                 </app-product-item>
             } @empty {

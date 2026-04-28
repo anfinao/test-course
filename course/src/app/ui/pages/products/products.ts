@@ -3,6 +3,8 @@ import { CategoryList } from "../../components/products/category-list/category-l
 import { ProductsList } from '../../components/products/products-list/products-list';
 import { DEPS_TEMP_TOKEN } from '../../../services/token/temp-deps.token';
 import { ProductStoreService } from '../../../services/products/store.service';
+import { PRODUCT_REPOSITORY_SERVICE } from '../../../services/products/product-repo.token';
+import { ProductRepositoryService } from '../../../services/products/product-repository.service';
 
 const TEMP_TOKEN = new InjectionToken<number>('Temp');
 
@@ -13,7 +15,8 @@ const TEMP_TOKEN = new InjectionToken<number>('Temp');
     styleUrl: './products.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        ProductStoreService
+        ProductStoreService,
+        { provide: PRODUCT_REPOSITORY_SERVICE, useClass: ProductRepositoryService }
     ]
 })
 export class Products implements AfterViewInit {

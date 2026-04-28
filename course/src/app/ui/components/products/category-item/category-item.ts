@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, DoCheck, effect, inject, input, NgZone, OnInit, signal } from '@angular/core';
+import { PRODUCT_REPOSITORY_SERVICE } from '../../../../services/products/product-repo.token';
+import { Category } from '../../../../types/category';
 
 @Component({
     selector: 'app-category-item',
@@ -8,10 +10,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, DoChec
     changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class CategoryItem implements DoCheck, OnInit {
-    public name = input.required<string>();
-    protected test = computed(() => this.name());
+    private productsService = inject(PRODUCT_REPOSITORY_SERVICE);
 
-    private cdr = inject(ChangeDetectorRef);
+    public categoryData = input.required<Category>();
+    protected name = computed(() => this.categoryData().name);
 
     constructor() {
         effect(() => {
@@ -20,20 +22,17 @@ export class CategoryItem implements DoCheck, OnInit {
     }
 
     ngOnInit(): void {
-        this.cdr.detach();
+        //this.cdr.detach();
     }
 
     ngDoCheck(): void {
-        console.log('CategoryItem')
+        // console.log('CategoryItem')
     }
 
-    checkCheck() {
-        console.log('--- CategoryItem Checked ---');
-        return '';
-    }
     protected onClick(): void {
-        //console.log('click')
-        this.cdr.reattach();
-        this.cdr.markForCheck();
+        const id = this.categoryData().id;
+        console.log('set category:', id);
+
+        this.productsService.setCategory(id);
     }
 }

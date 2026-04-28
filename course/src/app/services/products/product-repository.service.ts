@@ -2,10 +2,13 @@ import { inject, Injectable, signal } from "@angular/core";
 import { Product } from "../../types";
 import { IProductRepositoryService } from "./product-repo.interface";
 import { ProductStoreService } from "./store.service";
+import { OperatorExample } from "../operator-example";
+import { concatMap, debounceTime, delay, exhaustMap, mergeMap, of, switchMap, tap } from "rxjs";
 
 @Injectable()
 export class ProductRepositoryService implements IProductRepositoryService {
     private productStore = inject(ProductStoreService);
+    private operatorExample = inject(OperatorExample);
 
     private productList: Product[] = [
         {
@@ -44,15 +47,56 @@ export class ProductRepositoryService implements IProductRepositoryService {
             category: "Дом и свет"
         }
     ];
-
+    private id = 0;
+    private fakeRequest(id: number, label: string) {
+        return of(`${label} ответ для ${id}`).pipe(
+            tap(() => console.log(`  ${label} [${id}] старт`)),
+            delay(2000),
+            tap(() => console.log(`  ${label} [${id}] финиш`))
+        );
+    }
 
     public loadProducts(): void {
         // load from service...
-        this.productStore.updateProductList(this.productList);
+        //this.productStore.updateProductList(this.productList);
+
+        this.operatorExample.getProducts().subscribe((productList) => {
+            this.productStore.updateProductList(productList);
+        });
+
+        // this.operatorExample.search$
+        //     .pipe(debounceTime(1000))
+        //     .subscribe((value) => {
+        //         console.log({ search: value });
+        //     });
+
+        // this.operatorExample.search$.pipe(
+        //     switchMap(() => this.fakeRequest(++this.id, 'switchMap'))
+        // ).subscribe(console.log);
+
+        // this.operatorExample.search$.pipe(
+        //     concatMap(() => this.fakeRequest(++this.id, 'concatMap'))
+        // ).subscribe(console.log);
+
+        // this.operatorExample.search$.pipe(
+        //     mergeMap(() => this.fakeRequest(++this.id, 'mergeMap'))
+        // ).subscribe(console.log);
+
+        this.operatorExample.search$.pipe(
+            exhaustMap(() => this.fakeRequest(++this.id, 'exhaustMap'))
+        ).subscribe(console.log);
+    }
+
+    public setCategory(categoryId: string): void {
+        this.operatorExample.setCategory(categoryId);
     }
 
     public deleteProduct(id: string): void {
         const index = this.productList.findIndex(product => product.id === id);
         this.productList.splice(index, 1);
+    }
+
+    public search(value: string): void {
+        this.operatorExample.search(value);
     }
 }
