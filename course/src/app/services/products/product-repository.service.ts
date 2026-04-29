@@ -1,102 +1,167 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { DestroyRef, inject, Injectable } from "@angular/core";
+import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
+import { concatMap, filter, forkJoin, Observable, switchMap, withLatestFrom } from "rxjs";
+import { LC_CATEGORY_KEY, LC_PRODUCT_KEY } from "../../data/constansts";
 import { Product } from "../../types";
+import { Category } from "../../types/category";
 import { IProductRepositoryService } from "./product-repo.interface";
 import { ProductStoreService } from "./store.service";
-import { OperatorExample } from "../operator-example";
-import { concatMap, debounceTime, delay, exhaustMap, mergeMap, of, switchMap, tap } from "rxjs";
+import { INIT_CATEGORIES, INIT_PRODUCTS } from "../../data/init-products";
 
 @Injectable()
 export class ProductRepositoryService implements IProductRepositoryService {
+    private destroyRef = inject(DestroyRef);
     private productStore = inject(ProductStoreService);
-    private operatorExample = inject(OperatorExample);
 
-    private productList: Product[] = [
-        {
-            id: "7b2-f41",
-            name: "Беспроводные наушники AirTune",
-            description: "Наушники с активным шумоподавлением и защитой от влаги.",
-            price: 12900,
-            category: "Электроника"
-        },
-        {
-            id: "a15-k98",
-            name: "Кожаный ежедневник",
-            description: "Формат А5, переплет из натуральной кожи, 200 страниц.",
-            price: 2500,
-            category: "Канцелярия"
-        },
-        {
-            id: "m44-s23",
-            name: "Кофемашина AromaPro",
-            description: "Автоматическая кофемашина с капучинатором и настройкой крепости напитка.",
-            price: 45000,
-            category: "Бытовая техника"
-        },
-        {
-            id: "x88-j12",
-            name: "Спортивная бутылка для воды",
-            description: "Объем 750 мл, выполнена из ударопрочного пластика BPA-free.",
-            price: 950,
-            category: "Спорт и отдых"
-        },
-        {
-            id: "e56-y31",
-            name: "Настольная лампа LED Flex",
-            description: "Регулируемая яркость и цветовая температура, сенсорное управление.",
-            price: 3200,
-            category: "Дом и свет"
-        }
-    ];
-    private id = 0;
-    private fakeRequest(id: number, label: string) {
-        return of(`${label} ответ для ${id}`).pipe(
-            tap(() => console.log(`  ${label} [${id}] старт`)),
-            delay(2000),
-            tap(() => console.log(`  ${label} [${id}] финиш`))
-        );
-    }
+    private readonly selectedCategoryId$ = toObservable(this.productStore.selectedCategoryId);
 
     public loadProducts(): void {
-        // load from service...
-        //this.productStore.updateProductList(this.productList);
+        forkJoin([
+            this.loadCategoriesFromLocalStorage(),
+            this.loadProductFromLocalStorage(),
+        ])
+            .pipe(
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe(([categoryList, productsList]) => {
+                this.productStore.updateCategoryList(categoryList);
+                this.productStore.updateProductList(productsList);
+            });
 
-        this.operatorExample.getProducts().subscribe((productList) => {
-            this.productStore.updateProductList(productList);
+        this.handleSelectCategoryChange();
+    }
+
+    private handleSelectCategoryChange(): void {
+        this.selectedCategoryId$
+            .pipe(
+                filter(Boolean),
+                switchMap((categoryId: string | null) => {
+                    return this.loadProductFromLocalStorage(categoryId)
+                }),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe((productsList) => {
+                this.productStore.updateProductList(productsList);
+            })
+    }
+
+    private loadCategoriesFromLocalStorage(): Observable<Category[]> {
+        return new Observable<Category[]>((observer) => {
+            const categoryLcData = localStorage.getItem(LC_CATEGORY_KEY);
+            if (categoryLcData) {
+                try {
+                    const categoryList = JSON.parse(categoryLcData);
+                    observer.next(categoryList);
+                } catch (e) {
+                    console.error(e);
+                    observer.next([]);
+                }
+            } else {
+                observer.next(INIT_CATEGORIES);
+            }
+            observer.complete();
         });
+    }
 
-        // this.operatorExample.search$
-        //     .pipe(debounceTime(1000))
-        //     .subscribe((value) => {
-        //         console.log({ search: value });
-        //     });
+    private loadProductFromLocalStorage(categoryId?: string | null): Observable<Product[]> {
+        return new Observable<Product[]>((observer) => {
+            const productsLcData = localStorage.getItem(LC_PRODUCT_KEY);
+            if (productsLcData) {
+                try {
+                    const productsList: Product[] = JSON.parse(productsLcData);
 
-        // this.operatorExample.search$.pipe(
-        //     switchMap(() => this.fakeRequest(++this.id, 'switchMap'))
-        // ).subscribe(console.log);
-
-        // this.operatorExample.search$.pipe(
-        //     concatMap(() => this.fakeRequest(++this.id, 'concatMap'))
-        // ).subscribe(console.log);
-
-        // this.operatorExample.search$.pipe(
-        //     mergeMap(() => this.fakeRequest(++this.id, 'mergeMap'))
-        // ).subscribe(console.log);
-
-        this.operatorExample.search$.pipe(
-            exhaustMap(() => this.fakeRequest(++this.id, 'exhaustMap'))
-        ).subscribe(console.log);
+                    observer.next(categoryId
+                        ? productsList.filter(product => product.categoryId === categoryId)
+                        : productsList);
+                } catch (e) {
+                    console.error(e);
+                    observer.next([]);
+                }
+            } else {
+                observer.next(INIT_PRODUCTS);
+            }
+            observer.complete();
+        });
     }
 
     public setCategory(categoryId: string): void {
-        this.operatorExample.setCategory(categoryId);
+        this.productStore.updateSelectedCategory(categoryId);
     }
 
     public deleteProduct(id: string): void {
-        const index = this.productList.findIndex(product => product.id === id);
-        this.productList.splice(index, 1);
+        this.deleteProductFromLc(id)
+            .pipe(
+                concatMap(() => {
+                    return this.loadProductFromLocalStorage(this.productStore.selectedCategoryId())
+                }),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe((productList) => {
+                this.productStore.updateProductList(productList);
+            });
+    }
+
+    private deleteProductFromLc(productId: string): Observable<void> {
+        return new Observable<void>((observer) => {
+            const productsLcData = localStorage.getItem(LC_PRODUCT_KEY);
+            if (productsLcData) {
+                try {
+                    const productsList: Product[] = JSON.parse(productsLcData) ?? [];
+                    const updatedProducts = productsList.filter(it => it.id !== productId);
+                    localStorage.setItem(LC_PRODUCT_KEY, JSON.stringify(updatedProducts));
+                } catch (e) {
+                    console.error(e);
+                    observer.error();
+                }
+            }
+
+            observer.next();
+            observer.complete();
+        })
+    }
+
+    public addProduct(productData: Omit<Product, "id">): void {
+        this.addProductLc(productData)
+            .pipe(
+                concatMap(() => {
+                    return this.loadProductFromLocalStorage(this.productStore.selectedCategoryId())
+                }),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe((productList) => {
+                this.productStore.updateProductList(productList);
+            });
+    }
+
+    private addProductLc(productData: Omit<Product, "id">): Observable<void> {
+        return new Observable<void>((observer) => {
+            const productsLcData = localStorage.getItem(LC_PRODUCT_KEY);
+            const newProduct = {
+                id: crypto.randomUUID(),
+                ...productData
+            };
+            if (productsLcData) {
+                try {
+                    const productsList: Product[] = JSON.parse(productsLcData) ?? [];
+                    const updatedProducts =
+                        [
+                            ...productsList,
+                            newProduct
+                        ];
+                    localStorage.setItem(LC_PRODUCT_KEY, JSON.stringify(updatedProducts));
+                } catch (e) {
+                    console.error(e);
+                    observer.error();
+                }
+            } else {
+                localStorage.setItem(LC_PRODUCT_KEY, JSON.stringify([newProduct]));
+            }
+            observer.next();
+            observer.complete();
+        })
     }
 
     public search(value: string): void {
-        this.operatorExample.search(value);
+        //this.operatorExample.search(value);
     }
 }

@@ -22,57 +22,10 @@
             }
         </div>
 
-
-        <!-- Диалог для формы добавления продукта -->
-        <!-- <dialog id="add-product-modal" aria-labelledby="add-product-title">
-            <div class="modal">
-                <div class="modal__header">
-                    <h2 class="modal__title" id="add-product-title">Добавление продукта</h2>
-                    <button class="modal__close" type="button" data-close aria-label="Закрыть">✕</button>
-                </div>
-
-                <section class="modal__body">
-                    <form class="add-product-form" name="add-product-form" action="#" method="post">
-                        <div class="field" data-label="Обязательно для заполнения">
-                            <label class="field__label" for="product-name">
-                                Название продукта
-                            </label>
-                            <input class="field__control" id="product-name" name="product-name" type="text"
-                                    placeholder="Введите наименование продукта" required>
-                        </div>
-
-                        <div class="field" data-label="Обязательно для заполнения">
-                            <label class="field__label" for="product-description">
-                                Описание продукта
-                            </label>
-                            <textarea id="product-description" name="product-description"
-                                        placeholder="Описание продукта"></textarea>
-                        </div>
-
-                        <div class="field" data-label="Обязательно для заполнения">
-                            <label class="field__label" for="product-price">
-                                Цена
-                            </label>
-                            <input class="field__control" id="product-price" name="product-price"
-                                    type="number" placeholder="Введите цену продукта" required>
-                        </div>
-
-                        <div class="add-product-form__actions">
-                            <button id="accept-add-product" class="button">
-                                Добавить продукт
-                            </button>
-                            <button id="cancel-add-product" class="button" type="reset">
-                                Отмена
-                            </button>
-                        </div>
-                    </form>
-                </section>
-            </div>
-        </dialog> -->
         @if (isAddModalOpen()) {
         <app-add-product-modal
             [isOpen]="isAddModalOpen()"
-            (close)="closeModal()"
+            (close)="closeModal($event)"
         ></app-add-product-modal>
         }
 

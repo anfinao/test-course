@@ -38,22 +38,22 @@ export class OperatorExample {
         }
     ];
 
-    private recommendedProducts: Product[] = [
-        {
-            id: '101',
-            name: 'AirPods Pro',
-            description: 'Беспроводные наушники',
-            price: 249,
-            categoryId: '1',
-        },
-        {
-            id: '102',
-            name: 'Magic Mouse',
-            description: 'Мышь Apple',
-            price: 99,
-            categoryId: '2',
-        },
-    ];
+    // private recommendedProducts: Product[] = [
+    //     {
+    //         id: '101',
+    //         name: 'AirPods Pro',
+    //         description: 'Беспроводные наушники',
+    //         price: 249,
+    //         categoryId: '1',
+    //     },
+    //     {
+    //         id: '102',
+    //         name: 'Magic Mouse',
+    //         description: 'Мышь Apple',
+    //         price: 99,
+    //         categoryId: '2',
+    //     },
+    // ];
 
     private productList: Product[] = [
         {
@@ -105,22 +105,19 @@ export class OperatorExample {
         // this.categoryFilter$.complete();
     }
 
-    private firstAttempt = true;
+    //private firstAttempt = true;
 
     public getProducts(): Observable<Product[]> {
-        // return of(this.productList);
+        //return of(this.productList);
 
-        // return combineLatest([
-        //     this.categoryFilter$,
-        //     of(this.productList)
-        // ]).pipe(
-        //     tap(([category, products]) => {
-        //         console.log({ category, products });
-        //     }),
-        //     map(([category, products]) => {
-        //         return products.filter(product => product.categoryId == category)
-        //     })
-        // )
+        return combineLatest([
+            this.categoryFilter$,
+            of(this.productList)
+        ]).pipe(
+            map(([category, products]) => {
+                return products.filter(product => product.categoryId == category)
+            })
+        )
 
         // return concat(
         //     of(this.recommendedProducts).pipe(delay(1000)),
@@ -172,27 +169,27 @@ export class OperatorExample {
         //     }),
         // )
 
-        return of(this.productList).pipe(
-            delay(1000),
-            switchMap((productList) => {
-                if (this.firstAttempt) {
-                    this.firstAttempt = false;
-                    return throwError(() => new Error('Первичная загрузка продуктов не удалась'));
-                }
-                return of(productList);
-                //return throwError(() => new Error('Первичная загрузка продуктов не удалась'));
-            }),
-            retry(2),
-            catchError(error => {
-                console.error('Ошибка после повторов:', error);
+        // return of(this.productList).pipe(
+        //     delay(1000),
+        //     switchMap((productList) => {
+        //         if (this.firstAttempt) {
+        //             this.firstAttempt = false;
+        //             return throwError(() => new Error('Первичная загрузка продуктов не удалась'));
+        //         }
+        //         return of(productList);
+        //         //return throwError(() => new Error('Первичная загрузка продуктов не удалась'));
+        //     }),
+        //     retry(2),
+        //     catchError(error => {
+        //         console.error('Ошибка после повторов:', error);
 
-                if (error instanceof Error) {
-                    return of([]);
-                }
+        //         if (error instanceof Error) {
+        //             return of([]);
+        //         }
 
-                return throwError(() => error);
-            })
-        );
+        //         return throwError(() => error);
+        //     })
+        // );
     }
 
     public search(value: string): void {

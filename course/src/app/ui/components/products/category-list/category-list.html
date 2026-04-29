@@ -1,9 +1,8 @@
 <section class="catalog__sidebar categories" aria-labelledby="categories-title">
-{{ checkCheck() }}
     <h2 class="categories__title" id="categories-title">Категории товаров</h2>
 
     <ul id="categories-list" class="categories__list">
-        @for (category of categories; track category.id) {
+        @for (category of categories(); track category.id) {
             <app-category-item [categoryData]="category"></app-category-item>
         }
     </ul>

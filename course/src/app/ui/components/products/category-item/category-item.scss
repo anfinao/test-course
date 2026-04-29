@@ -8,7 +8,8 @@
     cursor: pointer;
 }
 
-.categories__item[active] {
+.categories__item[active],
+.categories__item.active {
     border: 2px solid rgba(47, 247, 198, 0.35);
 }
 

@@ -4,6 +4,7 @@ import { PRODUCT_REPOSITORY_SERVICE } from '../../../../services/products/produc
 import { ProductStoreService } from '../../../../services/products/store.service';
 import { AddProductModal } from "../add-product-modal/add-product-modal";
 import { ProductItem } from "../product-item/product-item";
+import { Product } from '../../../../types';
 
 @Component({
     selector: 'app-products-list',
@@ -42,21 +43,11 @@ export class ProductsList implements OnInit, OnChanges {
         this.isAddModalOpen.set(true);
     }
 
-    protected closeModal(): void {
+    protected closeModal(event: Omit<Product, 'id'> | void): void {
         this.isAddModalOpen.set(false);
-
-        setTimeout(() => {
-            // this.productList.push({
-            //     id: "1" + new Date().toString(),
-            //     name: new Date().toString(),
-            //     description: "Регулируемая яркость и цветовая температура, сенсорное управление.",
-            //     price: 3200,
-            //     category: "Дом и свет"
-            // });
-
-            // console.log('ADD');
-            // this.cdr.markForCheck();
-        }, 1000)
+        if (event) {
+            this.productRepostoryService.addProduct(event)
+        }
     }
 
     protected deleteProduct(id: string): void {

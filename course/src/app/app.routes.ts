@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ProductStoreService } from './services/products/store.service';
 
 export const routes: Routes = [
     {
@@ -14,5 +13,11 @@ export const routes: Routes = [
     {
         path: 'products',
         loadComponent: () => import('./ui/pages/products/products').then(c => c.Products),
+        children: [
+            {
+                path: ':id',
+                loadComponent: () => import('./ui/pages/product/product').then(c => c.Product)
+            }
+        ]
     }
 ];
