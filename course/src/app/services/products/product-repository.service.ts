@@ -7,18 +7,23 @@ import { Category } from "../../types/category";
 import { IProductRepositoryService } from "./product-repo.interface";
 import { ProductStoreService } from "./store.service";
 import { INIT_CATEGORIES, INIT_PRODUCTS } from "../../data/init-products";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable()
 export class ProductRepositoryService implements IProductRepositoryService {
     private destroyRef = inject(DestroyRef);
     private productStore = inject(ProductStoreService);
+    private readonly router = inject(Router);
+    private readonly activatedRoute = inject(ActivatedRoute);
 
     private readonly selectedCategoryId$ = toObservable(this.productStore.selectedCategoryId);
 
-    public loadProducts(): void {
+    public loadCatalog(): void {
+        const categoryFromPath = this.loadCategoryFromUrl();
+
         forkJoin([
             this.loadCategoriesFromLocalStorage(),
-            this.loadProductFromLocalStorage(),
+            this.loadProductFromLocalStorage(categoryFromPath),
         ])
             .pipe(
                 takeUntilDestroyed(this.destroyRef)
@@ -28,7 +33,16 @@ export class ProductRepositoryService implements IProductRepositoryService {
                 this.productStore.updateProductList(productsList);
             });
 
+        if (categoryFromPath) {
+            this.productStore.updateSelectedCategory(categoryFromPath);
+        }
         this.handleSelectCategoryChange();
+    }
+
+    private loadCategoryFromUrl(): string | null {
+        const queryParams = this.activatedRoute.snapshot.queryParams;
+        console.log(this.activatedRoute.snapshot);
+        return queryParams['category'];
     }
 
     private handleSelectCategoryChange(): void {
@@ -86,6 +100,13 @@ export class ProductRepositoryService implements IProductRepositoryService {
 
     public setCategory(categoryId: string): void {
         this.productStore.updateSelectedCategory(categoryId);
+        this.router.navigate(
+            [],
+            {
+                queryParams: {
+                    category: categoryId
+                }
+            });
     }
 
     public deleteProduct(id: string): void {

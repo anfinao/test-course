@@ -13,6 +13,7 @@
                     [description]="product.description"
                     [price]="product.price"
                     (delete)="deleteProduct(product.id)"
+                    (click)="onProductCardClick(product.id)"
                 >
                     <span>{{ $first ? 'first' : 'not first' }} </span>
                     <span header>Hello 2</span>

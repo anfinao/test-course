@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-error-page',
   imports: [],
-  templateUrl: './product.html',
-  styleUrl: './product.scss',
+  templateUrl: './error-page.html',
+  styleUrl: './error-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Product { }
+export class ErrorPage { }

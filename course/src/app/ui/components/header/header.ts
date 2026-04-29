@@ -14,14 +14,19 @@ export class Header {
 
     protected links: MenuItem[] = [
         {
-            title: 'About',
+            title: 'Главная',
             linkHref: '/about',
             accessRole: 'admin'
         },
         {
-            title: 'Catalog',
+            title: 'Каталог',
             linkHref: '/products',
             accessRole: 'user'
+        },
+        {
+            title: 'Админка',
+            linkHref: '/admin',
+            accessRole: 'admin'
         },
     ]
 }

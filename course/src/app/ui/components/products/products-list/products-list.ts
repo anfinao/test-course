@@ -5,6 +5,7 @@ import { ProductStoreService } from '../../../../services/products/store.service
 import { AddProductModal } from "../add-product-modal/add-product-modal";
 import { ProductItem } from "../product-item/product-item";
 import { Product } from '../../../../types';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-products-list',
@@ -16,6 +17,9 @@ import { Product } from '../../../../types';
 export class ProductsList implements OnInit, OnChanges {
     private productStore = inject(ProductStoreService);
     private productRepostoryService = inject(PRODUCT_REPOSITORY_SERVICE);
+
+    private router = inject(Router);
+    private activatedRoute = inject(ActivatedRoute);
 
     protected productList = this.productStore.productList;
 
@@ -29,7 +33,7 @@ export class ProductsList implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        this.productRepostoryService.loadProducts();
+        this.productRepostoryService.loadCatalog();
 
         console.log('ProductsList ngOnInit')
     }
@@ -52,5 +56,15 @@ export class ProductsList implements OnInit, OnChanges {
 
     protected deleteProduct(id: string): void {
         this.productRepostoryService.deleteProduct(id);
+    }
+
+    protected onProductCardClick(id: string): void {
+        //this.router.navigate(['products', `${id}`]);
+
+        this.router.navigate(
+            [`${id}`],
+            { relativeTo: this.activatedRoute }
+        );
+        //this.router.navigateByUrl(`/products/${id}`);
     }
 }

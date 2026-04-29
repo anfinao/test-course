@@ -5,12 +5,13 @@ import { DEPS_TEMP_TOKEN } from '../../../services/token/temp-deps.token';
 import { ProductStoreService } from '../../../services/products/store.service';
 import { PRODUCT_REPOSITORY_SERVICE } from '../../../services/products/product-repo.token';
 import { ProductRepositoryService } from '../../../services/products/product-repository.service';
+import { RouterOutlet } from '@angular/router';
 
 const TEMP_TOKEN = new InjectionToken<number>('Temp');
 
 @Component({
     selector: 'app-products',
-    imports: [ProductsList, CategoryList],
+    imports: [RouterOutlet],
     templateUrl: './products.html',
     styleUrl: './products.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

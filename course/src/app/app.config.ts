@@ -1,11 +1,29 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
+import { RouteDataService } from './services/app/route-data.service';
+import { MOCK_USER } from './services/token/mock-user.token';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+    providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideRouter(
+            routes,
+            // withComponentInputBinding(),
+            withInMemoryScrolling({
+                scrollPositionRestoration: 'enabled',
+                anchorScrolling: 'enabled',
+            }),
+        ),
+        RouteDataService,
+        {
+            provide: MOCK_USER,
+            useValue: {
+                id: '1',
+                name: 'Some User',
+                role: 'guest'
+            }
+        },
+    ]
 };
