@@ -1,10 +1,19 @@
 <h3 class="product-card__title">{{ title() }}</h3>
 <p class="product-card__desc">Описание: {{ description() }}</p>
 <p class="product-card__price">
-    Цена: <span class="product-card__price-value"> {{ price() }}</span> руб.
+    Цена:
+    <span
+        class="product-card__price-value"
+        appPriceBadge
+        [price]="price() | discountPrice: 50"
+        [oldPrice]="price()"
+        [withDiscount]="true"
+    >
+        {{ price() | appNumberGroup }}
+    </span>
 </p>
 <ng-content select="[header]"></ng-content>
 <ng-content></ng-content>
 <button class="button button--primary" type="button">Купить</button>
 <br />
-<button class="button button--primary" type="button" (click)="onDelete()">Удаление</button>
+<button class="button button--primary" type="button" (click)="onDelete($event)">Удаление</button>

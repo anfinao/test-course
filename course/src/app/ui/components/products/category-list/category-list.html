@@ -38,10 +38,23 @@
         </div>
     </dialog>
 
-    <div class="example-btn-container" data-hidden hidden>
-        <button
+    @if (isEditMode()) {
+        <!-- <div class="btn-container"
+        animate.enter="panel-enter"
+        animate.leave="panel-leave">
+            <button
                 id="clone-category"
                 class="button example-btn"
                 type="button">Добавить категорию</button>
-    </div>
+        </div> -->
+        <div class="btn-container" animate.enter="panel-enter"
+        (animate.leave)="leavingFn($event)">
+            <button
+                id="clone-category"
+                type="button"
+                class="button example-btn"
+                (click)="openCategoryDialog()"
+            >Добавить категорию</button>
+        </div>
+    }
     </section>

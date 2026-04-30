@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable } from "@angular/core";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
-import { concatMap, filter, forkJoin, Observable, switchMap, withLatestFrom } from "rxjs";
+import { concatMap, filter, forkJoin, Observable, switchMap, tap, withLatestFrom } from "rxjs";
 import { LC_CATEGORY_KEY, LC_PRODUCT_KEY } from "../../data/constansts";
 import { Product } from "../../types";
 import { Category } from "../../types/category";
@@ -8,6 +8,7 @@ import { IProductRepositoryService } from "./product-repo.interface";
 import { ProductStoreService } from "./store.service";
 import { INIT_CATEGORIES, INIT_PRODUCTS } from "../../data/init-products";
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable()
 export class ProductRepositoryService implements IProductRepositoryService {
@@ -15,6 +16,7 @@ export class ProductRepositoryService implements IProductRepositoryService {
     private productStore = inject(ProductStoreService);
     private readonly router = inject(Router);
     private readonly activatedRoute = inject(ActivatedRoute);
+    private readonly snackBar = inject(MatSnackBar);
 
     private readonly selectedCategoryId$ = toObservable(this.productStore.selectedCategoryId);
 
@@ -115,6 +117,9 @@ export class ProductRepositoryService implements IProductRepositoryService {
                 concatMap(() => {
                     return this.loadProductFromLocalStorage(this.productStore.selectedCategoryId())
                 }),
+                tap(() => {
+                    this.snackBar.open('Продукт удален', 'OK', { duration: 3000 })
+                }),
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe((productList) => {
@@ -146,6 +151,9 @@ export class ProductRepositoryService implements IProductRepositoryService {
             .pipe(
                 concatMap(() => {
                     return this.loadProductFromLocalStorage(this.productStore.selectedCategoryId())
+                }),
+                tap(() => {
+                    this.snackBar.open('Продукт добавлен', 'OK', { duration: 3000 })
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )

@@ -30,6 +30,14 @@
                         type="text"
                         placeholder="Введите наименование продукта"
                     >
+                    <!-- <input
+                        class="field__control"
+                        appPhoneMask
+                        id="product-name"
+                        formControlName="name"
+                        type="text"
+                        placeholder="Введите наименование продукта"
+                    > -->
                 </div>
 
                 <div class="field" data-label="Обязательно для заполнения">
@@ -37,6 +45,7 @@
                         Описание продукта
                     </label>
                     <textarea
+                        myField
                         id="product-description" class="field__control"
                         name="product-description"
                         formControlName="description"
@@ -59,10 +68,19 @@
 
                 <div formArrayName="characteristics" class="characteristics">
                     @for (item of characteristics.controls; track $index) {
-                    <div [formGroupName]="$index" class="characteristics__row">
-                        <input class="field__control" formControlName="characteristic" placeholder="Характеристика" />
-                        <input class="field__control" formControlName="value" placeholder="Значение" />
-                        <button type="button" (click)="removeCharacteristic($index)" class="modal__close">X</button>
+                        <div [formGroupName]="$index" class="characteristics__row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Характеристика</mat-label>
+                            <input matInput formControlName="characteristic" placeholder="Характеристика">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Значение</mat-label>
+                            <input matInput formControlName="value" placeholder="Значение">
+                        </mat-form-field>
+                        <button matIconButton type="button" (click)="removeCharacteristic($index)" aria-label="Example icon button with a menu icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
                     }
                 </div>

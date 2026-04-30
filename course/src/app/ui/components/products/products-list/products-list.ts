@@ -6,27 +6,45 @@ import { AddProductModal } from "../add-product-modal/add-product-modal";
 import { ProductItem } from "../product-item/product-item";
 import { Product } from '../../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppStoreService } from '../../../../services/app/app-store.service';
+import { CurrencyPipe, DatePipe, DecimalPipe, KeyValuePipe, LowerCasePipe, PercentPipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-products-list',
-    imports: [ProductItem, AddProductModal, FormsModule],
+    imports: [
+        ProductItem,
+        AddProductModal,
+        FormsModule,
+        CurrencyPipe,
+        DatePipe,
+        DecimalPipe,
+        KeyValuePipe,
+        LowerCasePipe,
+        PercentPipe,
+        SlicePipe,
+        TitleCasePipe,
+        UpperCasePipe
+    ],
     templateUrl: './products-list.html',
     styleUrl: './products-list.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsList implements OnInit, OnChanges {
-    private productStore = inject(ProductStoreService);
-    private productRepostoryService = inject(PRODUCT_REPOSITORY_SERVICE);
+    private readonly productStore = inject(ProductStoreService);
+    private readonly productRepostoryService = inject(PRODUCT_REPOSITORY_SERVICE);
+    private readonly appStore = inject(AppStoreService);
 
     private router = inject(Router);
     private activatedRoute = inject(ActivatedRoute);
 
     protected productList = this.productStore.productList;
+    protected isEditMode = this.appStore.isEditMode;
 
     public text = input();
     protected isAddModalOpen = signal(false);
 
     protected searchData = '';
+    protected today = new Date();
 
     ngOnChanges(changes: SimpleChanges): void {
         // console.log({ changes })
@@ -35,7 +53,7 @@ export class ProductsList implements OnInit, OnChanges {
     ngOnInit(): void {
         this.productRepostoryService.loadCatalog();
 
-        console.log('ProductsList ngOnInit')
+        //console.log('ProductsList ngOnInit')
     }
 
     protected search(value: Event): void {

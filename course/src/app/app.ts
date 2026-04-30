@@ -5,6 +5,8 @@ import { Footer } from "./ui/components/footer/footer";
 import { DEPS_TEMP_TOKEN } from './services/token/temp-deps.token';
 import { RouteDataService } from './services/app/route-data.service';
 import { Loader } from "./ui/components/loader/loader";
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
@@ -20,6 +22,15 @@ export class App implements OnInit {
     private readonly routerDataChangeService = inject(RouteDataService);
     protected readonly loading = this.routerDataChangeService.loading;
 
+    constructor(
+        private matIconRegistry: MatIconRegistry,
+        private sanitizer: DomSanitizer
+    ) {
+        this.matIconRegistry.addSvgIcon(
+            'my-icon',
+            this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/done_outline_24dp.svg')
+        );
+    }
     public ngOnInit(): void {
         this.routerDataChangeService.handleDataRouteChange();
         this.routerDataChangeService.loadResourcesHandle();

@@ -4,13 +4,14 @@ import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from 
 import { routes } from './app.routes';
 import { RouteDataService } from './services/app/route-data.service';
 import { MOCK_USER } from './services/token/mock-user.token';
+import { AppStoreService } from './services/app/app-store.service';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideRouter(
             routes,
-            // withComponentInputBinding(),
+            withComponentInputBinding(),
             withInMemoryScrolling({
                 scrollPositionRestoration: 'enabled',
                 anchorScrolling: 'enabled',
@@ -22,8 +23,9 @@ export const appConfig: ApplicationConfig = {
             useValue: {
                 id: '1',
                 name: 'Some User',
-                role: 'guest'
+                role: 'admin'
             }
         },
+        AppStoreService
     ]
 };

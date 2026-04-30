@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { PriceBadgeDirective } from '../../../directives/price.directive';
+import { NumberGroupPipe } from '../../../pipes/number-group-pipe';
+import { DiscountPricePipe } from '../../../pipes/discount.pipe';
 
 @Component({
     selector: 'app-product-item',
-    imports: [],
+    imports: [PriceBadgeDirective, NumberGroupPipe, DiscountPricePipe],
     templateUrl: './product-item.html',
     styleUrl: './product-item.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    // encapsulation: ViewEncapsulation.None
 })
 export class ProductItem {
     public title = input.required<string>();
@@ -13,7 +17,8 @@ export class ProductItem {
     public description = input.required<string>();
     public delete = output<void>();
 
-    protected onDelete(): void {
+    protected onDelete(event: Event): void {
+        event.stopPropagation();
         this.delete.emit();
     }
 }

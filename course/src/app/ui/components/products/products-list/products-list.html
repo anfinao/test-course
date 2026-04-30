@@ -1,8 +1,31 @@
 <section class="catalog__content products-section">
     <section class="products-section__block" aria-labelledby="popular-title">
         <h2 class="products-section__title" id="popular-title">Популярные продукты</h2>
+        <div>{{ 125.5 | currency: 'EUR' : 'symbol' }}</div>
+            <hr>
+        <div>{{ today | date: 'dd - MM - yyyy' }}</div>
+            <hr>
+        <div>{{ 3.14159 | number: '1.2-2' }}</div>
+            <hr>
+        <span>{{ 'HELLO WORLD' | lowercase }}</span>
+            <hr>
+        <span>{{ 0.456 | percent }}</span>
+            <hr>
+        <span>{{ 'AngularFramework' | slice:0:7 }}</span>
+            <hr>
+        <span>{{ 'ivan ivanov' | titlecase }}</span>
+            <hr>
+        <span>{{ 'angular' | uppercase }}</span>
+            <hr>
 
         <input [(ngModel)]="searchData" (input)="search($event)">
+
+        <div>
+        @for (item of (productList()[0] | keyvalue); track item.key) {
+            {{ item.key }}: {{ item.value }}
+            <hr>
+        }
+        </div>
 
         <div id="product-list" class="product-grid">
             @let list = productList();
@@ -30,15 +53,18 @@
         ></app-add-product-modal>
         }
 
-        <div class="example-btn-container">
-            <button
-                class="button example-btn"
-                type="button"
-                (click)="openModal()"
-            >
-                Добавить продукт
-            </button>
-        </div>
+        @if (isEditMode()) {
+            <div class="btn-container" animate.enter="panel-enter" animate.leave="panel-leave">
+                <button
+                    class="button example-btn"
+                    type="button"
+                    (click)="openModal()"
+                >
+                    Добавить продукт
+                </button>
+            </div>
+        }
+
 
     </section>
 </section>

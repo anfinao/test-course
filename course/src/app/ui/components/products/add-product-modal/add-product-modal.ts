@@ -3,6 +3,12 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { PRODUCT_REPOSITORY_SERVICE } from '../../../../services/products/product-repo.token';
 import { ProductStoreService } from '../../../../services/products/store.service';
 import { Product } from '../../../../types';
+import { CustomFieldDirective } from '../../../directives/field.directive';
+import { PhoneMaskDirective } from "../../../directives/phone-mask.directive";
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from "@angular/material/icon";
+import { MatMiniFabButton, MatIconButton } from '@angular/material/button';
 
 type CharacteristicForm = FormGroup<{
     characteristic: FormControl<string>;
@@ -11,7 +17,7 @@ type CharacteristicForm = FormGroup<{
 
 @Component({
     selector: 'app-add-product-modal',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, CustomFieldDirective, MatFormFieldModule, MatInputModule, PhoneMaskDirective, MatMiniFabButton, MatIcon, MatIconButton],
     templateUrl: './add-product-modal.html',
     styleUrl: './add-product-modal.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -50,3 +50,44 @@
 .product-card__price-value {
     color: var(--color-yellow);
 }
+
+
+
+.price-high {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.price-low {
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.price-discount {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 8px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+}
+
+::ng-deep {
+    .price-old {
+        color: #9ca3af;
+        text-decoration: line-through;
+        font-size: 0.875rem;
+    }
+}
+
+// .price-old {
+//     color: #9ca3af;
+//     text-decoration: line-through;
+//     font-size: 0.875rem;
+// }
+
+.price-current {
+    color: #111827;
+    font-weight: 700;
+}
